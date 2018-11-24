@@ -14,14 +14,10 @@ import Entidades.Utilizador;
  */
 public class Main {
      public static void main(String[] args) {
-//         Utilizador u = new Utilizador("Tony", "123");
-//         
-         UtilizadorDao ud = new UtilizadorDao("utilizador");
-//         
-//         ud.guardar(u);
-
-            Utilizador u = ud.recuperar("Tony");
-            
-            System.out.println(u);
+         /*UtilizadorDao ud = new UtilizadorDao("utilizador");
+         ud.guardar(u);
+         Utilizador u = ud.recuperar("Tony");
+         System.out.println(u);*/
+         new Server();
      }
 }
