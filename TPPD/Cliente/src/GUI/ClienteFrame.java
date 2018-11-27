@@ -2,10 +2,10 @@ package GUI;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 public class ClienteFrame extends JFrame implements Observer {
 
@@ -24,8 +24,8 @@ public class ClienteFrame extends JFrame implements Observer {
     JLabel passwordInfo = new JLabel();
     JTextField password = new JPasswordField();
 
-    JComboBox servers = new JComboBox();
-    JComboBox ports = new JComboBox();
+    JTextField serverName = new JTextField();
+    JSpinner serverPort = new JSpinner(new SpinnerNumberModel(9999, 1024, 65535, 1));
 
     Dimension loginDim = new Dimension(200, 32);
 
@@ -99,15 +99,12 @@ public class ClienteFrame extends JFrame implements Observer {
         passwordInfo.add(password);
         add(passwordInfo);
 
-        servers.setBounds(x+75, y+84, 110, 35);
-        servers.setRenderer(new MyComboBoxRenderer(" SERVIDORES"));
-        servers.setSelectedIndex(-1); //By default it selects first item, we don't want any selection
-        add(servers);
+        serverName.setBounds(x+75, y+84, 110, 35);
+        serverName.setText("127.0.0.1");
+        add(serverName);
 
-        ports.setBounds(x + 190, y + 84, 85, 35);
-        ports.setRenderer(new MyComboBoxRenderer(" PORTOS"));
-        ports.setSelectedIndex(-1); //By default it selects first item, we don't want any selection
-        add(ports);
+        serverPort.setBounds(x + 190, y + 84, 85, 35);
+        add(serverPort);
 
 
         ops.setBounds(x+75,y+120,200,40);
@@ -141,8 +138,8 @@ public class ClienteFrame extends JFrame implements Observer {
         textUsername.setVisible(false);
         textServers.setVisible(false);
         titulo.setVisible(false);
-        servers.setVisible(false);
-        ports.setVisible(false);
+        serverName.setVisible(false);
+        serverPort.setVisible(false);
 
         DefaultListModel<String> utilizadoresAtivos = new DefaultListModel<>();
         utilizadoresAtivos.addElement("VicVega");
@@ -196,8 +193,29 @@ public class ClienteFrame extends JFrame implements Observer {
         return msgButton;
     }
 
-    public JComboBox getJCB_Servers(){
-        return servers;
+
+    public String getServerName() {
+        return this.serverName.getText();
     }
 
+    public int getServerPort() {
+        try {
+            this.serverPort.commitEdit(); // para verificar se foram introduzidos dados manualmente e guarda-los
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return (Integer) this.serverPort.getValue();
+    }
+
+    public void aprensentarAlerta(String tipo, String msg) {
+
+        switch(tipo){
+            case "Info": JOptionPane.showMessageDialog(this, msg, "Informação", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case "Erro": JOptionPane.showMessageDialog(this, msg, "Erro!", JOptionPane.ERROR_MESSAGE);
+                break;
+            default: JOptionPane.showMessageDialog(this, msg, "Informação", JOptionPane.INFORMATION_MESSAGE);
+                break;
+        }
+    }
 }

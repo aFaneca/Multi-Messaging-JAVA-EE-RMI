@@ -14,7 +14,7 @@ public class Main implements Observable{
 
     public Main(){
         Controlador c = new Controlador(this);
-        acedeAoServer();
+        //acedeAoServer();
     }
 
     public static void main(String args[]){
