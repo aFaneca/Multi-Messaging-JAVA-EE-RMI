@@ -1,13 +1,14 @@
 package Controlador;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 public class Servidor {
     protected Socket s;
     protected String serverName;
     protected int serverPort;
-
+    protected ObjectOutputStream out;
+    protected ObjectInputStream in;
 
     public Servidor(String serverName, int serverPort) {
 
@@ -15,6 +16,37 @@ public class Servidor {
         this.serverPort = serverPort;
     }
 
+    public boolean testaConexão(){
+        try{
+            s = new Socket(this.serverName, this.serverPort);
+            s.close();
+            return true;
+        }catch(IOException e) {
+            return false;
+        }
+    }
+
+    public void conectar(){
+        try{
+            s = new Socket(this.serverName, this.serverPort);
+            new Thread (new EscutaServidor(s)).start();
+            in = new ObjectInputStream(s.getInputStream());
+            out = new ObjectOutputStream(s.getOutputStream());
+
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void fecharConexao(){
+        try {
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /* Getters & Setters */
     public Socket getSocket() {
         return s;
     }
@@ -39,14 +71,34 @@ public class Servidor {
         this.serverPort = serverPort;
     }
 
-    public boolean testaConexão(){
+    public ObjectOutputStream getOut() {
+        return out;
+    }
 
-        try{
-            s = new Socket(this.serverName, this.serverPort);
-            s.close();
-            return true;
-        }catch(IOException e) {
-            return false;
+    public void setOut(ObjectOutputStream out) {
+        this.out = out;
+    }
+
+    public ObjectInputStream getIn() {
+        return in;
+    }
+
+    public void setIn(ObjectInputStream in) {
+        this.in = in;
+    }
+
+    private class EscutaServidor implements Runnable{
+        private Socket s;
+
+        public EscutaServidor(Socket s){
+            this.s = s;
+        }
+
+        @Override
+        public void run() {
+            while(true){
+                // Lê mensagens que recebe do servidor e interpreta-as
+            }
         }
     }
 }

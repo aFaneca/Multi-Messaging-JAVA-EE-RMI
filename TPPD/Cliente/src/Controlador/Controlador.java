@@ -69,6 +69,8 @@ public class Controlador implements ActionListener{
         return true;
     }
 
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object origem = e.getSource();
