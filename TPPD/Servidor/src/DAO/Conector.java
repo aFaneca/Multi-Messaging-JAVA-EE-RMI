@@ -10,11 +10,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conector {
-    static String url = "jdbc:mysql://localhost/pd?serverTimezone=UTC";
-    static String user = "pd";
-    static String password = "pd";
-    static Connection con;
-    
+    protected static String url = "jdbc:mysql://localhost/pd?serverTimezone=UTC";
+    protected static String user = "pd";
+    protected static String password = "pd";
+    protected static Connection con;
+
+    protected static String ipDB;
+
     public static Connection getConexao() throws SQLException {
 
         try{
@@ -27,7 +29,16 @@ public class Conector {
             throw new SQLException(e.getMessage());
         }
     }
-    
+
+    public static String getIpDB() {
+        return ipDB;
+    }
+
+    public static void setIpDB(String ipDB) {
+        Conector.ipDB = ipDB;
+        Conector.url = "jdbc:mysql://" + ipDB + "/?serverTimezone=UTC";
+    }
+
     public static void fecharConexao() throws SQLException{
         con.close();
     }

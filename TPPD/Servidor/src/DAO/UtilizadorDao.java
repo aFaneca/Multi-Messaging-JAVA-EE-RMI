@@ -17,16 +17,14 @@ import java.util.logging.Logger;
  * @author me
  */
 public class UtilizadorDao {
-    private String nomeDaTabela;
+    private static String nomeDaTabela = "utilizador";
 
-    public UtilizadorDao(String nomeDaTabela) {
-        this.nomeDaTabela = nomeDaTabela;
-    }
+
     
     
     
-    public void guardar(Utilizador u){
-        String sql = "INSERT INTO " + this.nomeDaTabela + " (username, password, estado, portaTCP, portaUDP, enderecoIP) values (?,?,?,?,?,?)"; // (?,...,?) - para evitar sql injection
+    public static void guardar(Utilizador u){
+        String sql = "INSERT INTO " + nomeDaTabela + " (username, password, estado, portaTCP, portaUDP, enderecoIP) values (?,?,?,?,?,?)"; // (?,...,?) - para evitar sql injection
         
         try {
             PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
@@ -45,8 +43,8 @@ public class UtilizadorDao {
         }  
     }
     
-    public Utilizador recuperar(String username){
-        String sql = "SELECT * FROM " + this.nomeDaTabela + " WHERE username = ? "; // (?,...,?) - para evitar sql injection
+    public static Utilizador recuperar(String username){
+        String sql = "SELECT * FROM " + nomeDaTabela + " WHERE username = ? "; // (?,...,?) - para evitar sql injection
         
         try {
             PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
@@ -63,7 +61,21 @@ public class UtilizadorDao {
         } 
         return null;
     }
-    
+
+    public static boolean validaLogin(String username, String password){
+
+        // Verifica se existe algum utilizador na BD com esse username
+        Utilizador u = recuperar(username);
+        if(u != null){
+            // User foi encontrado na BD
+            // Comparar password -> ver se dá match
+            return u.getPassword().equals(password); // se houver match, o login é válido
+        }else{
+            // User não foi encontrado na BD
+            return false;
+        }
+    }
+
     private static Utilizador transformarEmObj(ResultSet rs) throws SQLException{
         String username, password;
         String estado;

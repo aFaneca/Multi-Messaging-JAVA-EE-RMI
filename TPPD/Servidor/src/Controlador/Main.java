@@ -18,6 +18,15 @@ public class Main {
          ud.guardar(u);
          Utilizador u = ud.recuperar("Tony");
          System.out.println(u);*/
-         new Server();
+        String ipdb;
+
+         if(args.length != 1){
+             System.out.println("Sintaxe: java Servidor {IP-DA-BD}");
+             return;
+         }
+
+         ipdb = args[0];
+
+         new Server(ipdb);
      }
 }

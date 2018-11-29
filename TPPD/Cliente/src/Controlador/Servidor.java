@@ -1,5 +1,8 @@
 package Controlador;
 
+import Modelo.Constantes;
+import Modelo.MSG;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -19,25 +22,55 @@ public class Servidor {
     public boolean testaConexão(){
         try{
             s = new Socket(this.serverName, this.serverPort);
-            s.close();
+            //s.close();
             return true;
         }catch(IOException e) {
+
             return false;
         }
     }
 
     public void conectar(){
         try{
-            s = new Socket(this.serverName, this.serverPort);
+            //s = new Socket(this.serverName, this.serverPort); // ligação TCP permanente com o server criada aqui
+            out = new ObjectOutputStream(s.getOutputStream()); // stream de saída
+            in = new ObjectInputStream(s.getInputStream()); // stream de entrada
             new Thread (new EscutaServidor(s)).start();
-            in = new ObjectInputStream(s.getInputStream());
-            out = new ObjectOutputStream(s.getOutputStream());
+
 
 
         }catch(IOException e){
             e.printStackTrace();
         }
     }
+
+
+    public void enviarParaServidor(MSG msg){
+        try {
+            //out = new ObjectOutputStream(s.getOutputStream()); // stream de saída
+            out.writeObject(msg);
+            out.flush();
+            //out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* Bloqueia aqui até que receba um objeto do servidor identificado pelo TIPO requirido (todos os outros são descartados)
+    *  Só está planeado utilizar este método antes de a autenticação se realizar. Após isso, é esperado
+    *  que novos pedidos sejam lidos pela thread dedicada
+    * */
+    public MSG receberDoServidor(Constantes.TIPOS tipo) throws IOException, ClassNotFoundException {
+        MSG msg;
+
+        while(true){
+            msg = (MSG) in.readObject();
+            if(msg.getTipo().equals(tipo)) break;
+        }
+
+        return msg;
+    }
+
 
     public void fecharConexao(){
         try {

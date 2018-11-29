@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="342423dc-515b-4f45-97f8-a81292a8d6bd" name="Default Changelist" comment="" />
+    <list default="true" id="342423dc-515b-4f45-97f8-a81292a8d6bd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TPPD/Controlador/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TPPD/Controlador/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TPPD/Controlador/Server$AtendeCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TPPD/Controlador/Server$AtendeCliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TPPD/Controlador/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TPPD/Controlador/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TPPD/DAO/Conector.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TPPD/DAO/Conector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controlador/Main.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,43 +42,49 @@
     <session id="-1262366053">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.23" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="1" />
+          <entry key="java" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="1" />
+          <entry key="JAVA" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1477" />
+          <entry key="java" value="3118" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1477" />
+          <entry key="JAVA" value="3118" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DAO/Conector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+            <state relative-caret-position="112">
+              <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+              <folding>
+                <element signature="e#999#1000#0" expanded="true" />
+                <element signature="e#1032#1033#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,8 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DAO/UtilizadorDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+            <state relative-caret-position="1122">
+              <caret line="65" selection-start-line="65" selection-end-line="65" />
               <folding>
                 <element signature="e#0#2551#0" expanded="true" />
               </folding>
@@ -88,14 +101,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controlador/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="946">
-              <caret line="64" column="78" selection-start-line="64" selection-start-column="78" selection-end-line="64" selection-end-column="78" />
+            <state relative-caret-position="204">
+              <caret line="118" column="40" lean-forward="true" selection-start-line="118" selection-start-column="40" selection-end-line="118" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#encaminharParaTodosOsClientes#0;class#Server#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modelo/Constantes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -103,8 +126,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controlador/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+            <state relative-caret-position="176">
+              <caret line="16" column="60" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -118,6 +141,14 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Conect</find>
+      <find>s.close</find>
+      <find>read</find>
+      <find>write</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
@@ -125,7 +156,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Controlador/Main.java" />
+        <option value="$PROJECT_DIR$/src/Modelo/Constantes.java" />
         <option value="$PROJECT_DIR$/src/Controlador/Server.java" />
+        <option value="$PROJECT_DIR$/src/DAO/UtilizadorDao.java" />
+        <option value="$PROJECT_DIR$/src/DAO/Conector.java" />
       </list>
     </option>
   </component>
@@ -137,7 +171,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-1609" />
-    <option name="y" value="-465" />
+    <option name="y" value="-464" />
     <option name="width" value="1618" />
     <option name="height" value="880" />
   </component>
@@ -149,22 +183,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="TPPD-Server" type="58d84e3e:PackageViewProjectNode" />
-              <item name="TPPD" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="TPPD-Server" type="58d84e3e:PackageViewProjectNode" />
-              <item name="TPPD" type="616d4139:PackageViewModuleNode" />
-              <item name="Controlador" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -185,26 +204,47 @@
             </path>
             <path>
               <item name="TPPD-Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Servidor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Modelo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TPPD-Server" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TPPD-Server" type="58d84e3e:PackageViewProjectNode" />
+              <item name="TPPD" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="TPPD-Server" type="58d84e3e:PackageViewProjectNode" />
+              <item name="TPPD" type="616d4139:PackageViewModuleNode" />
+              <item name="Controlador" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543096913188" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543454173517" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/mysql-connector-java-8.0.13.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -228,6 +268,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controlador.Main" />
       <module name="TPPD" />
+      <option name="PROGRAM_PARAMETERS" value="127.0.0.1/pd" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Controlador.*" />
@@ -263,11 +304,13 @@
       <workItem from="1543155292732" duration="628000" />
       <workItem from="1543345206434" duration="81000" />
       <workItem from="1543356154232" duration="605000" />
+      <workItem from="1543431438786" duration="597000" />
+      <workItem from="1543443680743" duration="8849000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9491000" />
+    <option name="totallyTimeSpent" value="18937000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -279,10 +322,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1609" y="-465" width="1618" height="880" extended-state="6" />
+    <frame x="-1609" y="-464" width="1618" height="880" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14007781" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14526589" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -292,8 +335,8 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.252809" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.252809" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.46132207" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32996634" />
@@ -301,7 +344,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32921347" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32921347" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32911393" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24973147" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -488,36 +531,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DAO/Conector.java">
+    <entry file="file://$PROJECT_DIR$/src/Modelo/Constantes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        <state relative-caret-position="242">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DAO/UtilizadorDao.java">
+    <entry file="file://$PROJECT_DIR$/src/Controlador/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+        <state relative-caret-position="204">
+          <caret line="118" column="40" lean-forward="true" selection-start-line="118" selection-start-column="40" selection-end-line="118" selection-end-column="40" />
           <folding>
-            <element signature="e#0#2551#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#encaminharParaTodosOsClientes#0;class#Server#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controlador/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        <state relative-caret-position="176">
+          <caret line="16" column="60" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controlador/Server.java">
+    <entry file="file://$PROJECT_DIR$/src/DAO/UtilizadorDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="946">
-          <caret line="64" column="78" selection-start-line="64" selection-start-column="78" selection-end-line="64" selection-end-column="78" />
+        <state relative-caret-position="1122">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#2551#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DAO/Conector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+          <folding>
+            <element signature="e#999#1000#0" expanded="true" />
+            <element signature="e#1032#1033#0" expanded="true" />
           </folding>
         </state>
       </provider>

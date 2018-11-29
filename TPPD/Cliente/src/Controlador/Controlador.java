@@ -7,10 +7,14 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import GUI.ClienteFrame;
+import Modelo.Auth;
+import Modelo.Constantes;
+import Modelo.MSG;
 import javafx.beans.InvalidationListener;
 
 import javax.swing.*;
@@ -53,14 +57,30 @@ public class Controlador implements ActionListener{
             f.aprensentarAlerta("Info", "Conexão Estabelecida!");
         }else{
             f.aprensentarAlerta("Erro", "Erro a estabelecer conexão...");
+            return;
         }
+
         // 2 - Envia username + password para o server
+        server.conectar();
+        server.enviarParaServidor(new MSG(Constantes.TIPOS.AUTH, new Auth(username, password)));
 
         // 3 - Espera por resposta
+        try {
+            MSG msg = server.receberDoServidor(Constantes.TIPOS.AUTH_REPLY);
 
-        // Toma decisão de acordo com a resposta recebida
-
-        return;
+            // 4 - Toma decisão de acordo com a resposta recebida
+            if((Boolean) msg.getObj()){
+                // Se a resposta do server é positiva => login é válido
+                f.loginAceite();
+            }else{
+                // Senão => login não é válido
+                f.aprensentarAlerta("Erro", "Dados de login inválidos!");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean validaLogin(String username, String password, String serverName, int serverPort){
