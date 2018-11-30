@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package Modelo;
+
+import java.io.Serializable;
 
 /**
  *
  * @author me
  */
-public class Utilizador {
+public class Utilizador  implements Serializable {
+    static final long serialVersionUID = 1000L;
     private String username;
     private String password;
     private String estado;

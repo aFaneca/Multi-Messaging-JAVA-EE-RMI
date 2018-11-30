@@ -20,7 +20,7 @@ public class Conector {
     public static Connection getConexao() throws SQLException {
 
         try{
-            //Class.forName("org.gjt.mm.mysql.Driver");
+            //Class.forName("com.mysql.jdbc.Driver");
             if(con == null){
                 con = DriverManager.getConnection(url,user,password);
             }
@@ -36,7 +36,7 @@ public class Conector {
 
     public static void setIpDB(String ipDB) {
         Conector.ipDB = ipDB;
-        Conector.url = "jdbc:mysql://" + ipDB + "/?serverTimezone=UTC";
+        Conector.url = "jdbc:mysql://" + ipDB + "?serverTimezone=UTC";
     }
 
     public static void fecharConexao() throws SQLException{

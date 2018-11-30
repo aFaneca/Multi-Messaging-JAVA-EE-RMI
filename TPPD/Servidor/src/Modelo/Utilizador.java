@@ -1,30 +1,46 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Modelo;
-
 
 import java.io.Serializable;
 
-/*
- * Modelo padrão para o envio da mensagem do tipo Auth
+/**
  *
- * */
-public class Auth implements Serializable {
-    static final long serialVersionUID = 10L;
+ * @author me
+ */
+public class Utilizador implements Serializable {
+    static final long serialVersionUID = 1000L;
     private String username;
     private String password;
+    private String estado;
     private int portaTCP;
     private int portaUDP;
     private String enderecoIP;
+    
+    
+    public Utilizador(String user, String pw){
+        this.username = user;
+        this.password = pw;
+        this.estado = "Indefinido";
+        this.portaTCP = 0;
+        this.portaUDP = 0;
+        this.enderecoIP = "0";
+    }
 
-
-    public Auth(String username, String password, int portaTCP, int portaUDP, String enderecoIP) {
+    public Utilizador(String username, String password, String estado, int portaTCP, int portaUDP, String enderecoIP) {
         this.username = username;
         this.password = password;
+        this.estado = estado;
         this.portaTCP = portaTCP;
         this.portaUDP = portaUDP;
         this.enderecoIP = enderecoIP;
     }
 
-    /* Getters & Setters */
+    
+    
     public String getUsername() {
         return username;
     }
@@ -39,6 +55,14 @@ public class Auth implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public int getPortaTCP() {
@@ -64,4 +88,6 @@ public class Auth implements Serializable {
     public void setEnderecoIP(String enderecoIP) {
         this.enderecoIP = enderecoIP;
     }
+    
+    
 }

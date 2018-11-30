@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
 
-public class ClienteFrame extends JFrame implements Observer {
+public class LoginView extends JFrame implements Observer {
 
     int x = 300;
     int y = 250;
@@ -36,22 +36,12 @@ public class ClienteFrame extends JFrame implements Observer {
 
     JLabel menuInicial = new JLabel();
 
-    JLabel contactos = new JLabel();
-    JList<String> contactosLista;
-
-    JLabel caixaDeChat = new JLabel();
-    JTextArea chat = new JTextArea();
-    Dimension chatDim = new Dimension(400,200);
-
-    JLabel msg = new JLabel();
-    JButton msgButton = new JButton("Enviar");
 
     String user = null;
     String pass = null;
-    String mensagem = null;
 
 
-    public ClienteFrame(){
+    public LoginView(){
 
         super();
         this.setTitle("PD");
@@ -124,55 +114,6 @@ public class ClienteFrame extends JFrame implements Observer {
         b.addActionListener(cont);
     }
 
-    public String getMsg(){
-        return mensagem;
-    }
-
-
-    public void loginAceite(){
-
-        ops.setVisible(false);
-        passwordInfo.setVisible(false);
-        usernameInfo.setVisible(false);
-        textPassword.setVisible(false);
-        textUsername.setVisible(false);
-        textServers.setVisible(false);
-        titulo.setVisible(false);
-        serverName.setVisible(false);
-        serverPort.setVisible(false);
-
-        DefaultListModel<String> utilizadoresAtivos = new DefaultListModel<>();
-        utilizadoresAtivos.addElement("VicVega");
-        utilizadoresAtivos.addElement("Maria Pinto");
-        utilizadoresAtivos.addElement("Adolfo Hilário");
-        utilizadoresAtivos.addElement("Mateus Salvador");
-        utilizadoresAtivos.addElement("Vitor Urbano");
-        utilizadoresAtivos.addElement("Maria Leprosa");
-        utilizadoresAtivos.addElement("xXXPUSSYDESTROYER69XXx");
-        utilizadoresAtivos.addElement("Twiisted");
-
-        //create the list
-        JList<String> uA = new JList<>(utilizadoresAtivos);
-
-        contactos.setBounds(x+50,y-100, 250,375);
-        contactos.setLayout(new FlowLayout());
-        contactos.add(uA);
-        contactos.setVisible(true);
-        add(contactos);
-
-        caixaDeChat.setBounds(x,y+100,400,200);
-        caixaDeChat.setLayout(new FlowLayout());
-        chat.setPreferredSize(chatDim); // 400 200
-        caixaDeChat.add(chat);
-        add(caixaDeChat);
-
-        msg.setBounds(x,y+300,200,40);
-        msg.setLayout(new FlowLayout());
-        msgButton.setPreferredSize(opsDim);
-        msg.add(msgButton);
-        add(msg);
-    }
-
     public String getPass(){
         return pass;
     }
@@ -186,11 +127,6 @@ public class ClienteFrame extends JFrame implements Observer {
         pass = password.getText();
 
         return loginButton;
-    }
-
-    public JButton getB_Enviar(){
-        mensagem = chat.getText();
-        return msgButton;
     }
 
 

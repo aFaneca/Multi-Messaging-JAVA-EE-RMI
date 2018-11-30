@@ -10,6 +10,8 @@ public class Constantes implements Serializable {
     public enum TIPOS {
         AUTH,
         AUTH_REPLY,
+        GET_USER_LIST,
+        GET_USER_LIST_REPLY,
         SAIR
     }
 

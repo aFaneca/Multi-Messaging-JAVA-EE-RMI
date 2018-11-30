@@ -2,22 +2,34 @@ package Controlador;
 
 import Modelo.Constantes;
 import Modelo.MSG;
+import Modelo.Utilizador;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
 
-public class Servidor {
+public class Servidor extends Observable{
     protected Socket s;
     protected String serverName;
     protected int serverPort;
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
+    protected List<Utilizador> listaDeUtilizadores;
 
     public Servidor(String serverName, int serverPort) {
 
         this.serverName = serverName;
         this.serverPort = serverPort;
+        this.listaDeUtilizadores = new ArrayList<Utilizador>();
     }
+
+    private void notificaObservadores(){
+        setChanged();
+        notifyObservers(this);
+    }
+
 
     public boolean testaConexão(){
         try{
@@ -35,10 +47,6 @@ public class Servidor {
             //s = new Socket(this.serverName, this.serverPort); // ligação TCP permanente com o server criada aqui
             out = new ObjectOutputStream(s.getOutputStream()); // stream de saída
             in = new ObjectInputStream(s.getInputStream()); // stream de entrada
-            new Thread (new EscutaServidor(s)).start();
-
-
-
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -67,7 +75,7 @@ public class Servidor {
             msg = (MSG) in.readObject();
             if(msg.getTipo().equals(tipo)) break;
         }
-
+        new Thread (new EscutaServidor(s)).start(); // dá início á thread que vai passar a ler ciclicamente novas mensagens recebidas
         return msg;
     }
 
@@ -79,6 +87,55 @@ public class Servidor {
             e.printStackTrace();
         }
     }
+
+
+    protected class EscutaServidor implements Runnable{
+        private Socket s;
+
+        public EscutaServidor(Socket s){
+            this.s = s;
+        }
+
+        @Override
+        public void run() {
+            while(true){
+                System.out.println("1");
+                // Lê mensagens que recebe do servidor e interpreta-as
+                MSG msg = null;
+                try {
+                    msg = (MSG) in.readObject();
+                    processaMsg(msg);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
+        private void processaMsg(MSG msg) {
+            switch(msg.getTipo()){
+                case GET_USER_LIST_REPLY:
+                    recebeListaDeUtilizadores(msg);
+                    break;
+                default: break;
+            }
+        }
+
+        private void recebeListaDeUtilizadores(MSG msg) {
+
+
+            listaDeUtilizadores = (List<Utilizador>) msg.getObj();
+
+            for(Utilizador u : listaDeUtilizadores)
+                System.out.println(u.getUsername() + " - " + u.getEstado());
+            notificaObservadores();
+            
+        }
+    }
+
+
     /* Getters & Setters */
     public Socket getSocket() {
         return s;
@@ -120,18 +177,17 @@ public class Servidor {
         this.in = in;
     }
 
-    private class EscutaServidor implements Runnable{
-        private Socket s;
+    public List<Utilizador> getListaDeUtilizadores() {
+        return listaDeUtilizadores;
+    }
 
-        public EscutaServidor(Socket s){
-            this.s = s;
+    public List<String> getListaDeUsernames() {
+        List<String> lista = new ArrayList<>();
+
+        for(Utilizador u : listaDeUtilizadores){
+            lista.add(u.getUsername() + " [ " + u.getEstado() + " ]");
         }
 
-        @Override
-        public void run() {
-            while(true){
-                // Lê mensagens que recebe do servidor e interpreta-as
-            }
-        }
+        return lista;
     }
 }

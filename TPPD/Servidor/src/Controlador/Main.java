@@ -5,9 +5,6 @@
  */
 package Controlador;
 
-import DAO.UtilizadorDao;
-import Entidades.Utilizador;
-
 /**
  *
  * @author me

@@ -5,10 +5,13 @@
  */
 package DAO;
 
-import Entidades.Utilizador;
+import Modelo.Auth;
+import Modelo.Utilizador;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,10 +22,6 @@ import java.util.logging.Logger;
 public class UtilizadorDao {
     private static String nomeDaTabela = "utilizador";
 
-
-    
-    
-    
     public static void guardar(Utilizador u){
         String sql = "INSERT INTO " + nomeDaTabela + " (username, password, estado, portaTCP, portaUDP, enderecoIP) values (?,?,?,?,?,?)"; // (?,...,?) - para evitar sql injection
         
@@ -62,6 +61,22 @@ public class UtilizadorDao {
         return null;
     }
 
+    public static List<Utilizador> recuperarTodosOsUtilizadores(){
+        String sql = "SELECT * FROM " + nomeDaTabela;
+
+        try {
+            PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            // Transforma o ResultSet num objeto de Utilizador
+            return transformarEmObjArr(rs);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilizadorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public static boolean validaLogin(String username, String password){
 
         // Verifica se existe algum utilizador na BD com esse username
@@ -76,6 +91,7 @@ public class UtilizadorDao {
         }
     }
 
+    /* Transforma o Result Set obtido da query num objeto do tipo Utilizador*/
     private static Utilizador transformarEmObj(ResultSet rs) throws SQLException{
         String username, password;
         String estado;
@@ -88,5 +104,44 @@ public class UtilizadorDao {
         }
 
         return null;
+    }
+
+    /* Transforma o Result Set obtido da query num array de objetos do tipo Utilizador*/
+    private static List<Utilizador> transformarEmObjArr(ResultSet rs) throws SQLException{
+        List<Utilizador> utilizadores = new ArrayList<>();
+        String username, password;
+        String estado;
+        int portaTCP;
+        int portaUDP;
+        String enderecoIP;
+
+        while(rs.next()){
+            utilizadores.add(new Utilizador(rs.getString("username"), rs.getString("password"), rs.getString("estado"), rs.getInt("portaTCP"), rs.getInt("portaUDP"), rs.getString("enderecoIP")));
+        }
+
+        return utilizadores;
+    }
+
+    public static void autenticarUtilizador(Auth auth) {
+        String sql = "UPDATE " + nomeDaTabela +
+                " SET estado = 'Ativo', portaTCP = ?, portaUDP = ?, enderecoIP = ? " +
+                "WHERE username = ? ";
+
+        try {
+            PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
+            ps.setInt(1, auth.getPortaTCP());
+            ps.setInt(2, auth.getPortaUDP());
+            ps.setString(3, auth.getEnderecoIP());
+            ps.setString(4, auth.getUsername());
+
+            ps.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilizadorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
+    public static void desautenticarUtilizador(String username) {
     }
 }
