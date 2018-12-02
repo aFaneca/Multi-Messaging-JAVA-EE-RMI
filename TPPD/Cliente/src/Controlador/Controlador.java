@@ -23,6 +23,7 @@ import javafx.beans.InvalidationListener;
 public class Controlador implements ActionListener{
 
     LoginView loginView = new LoginView();
+    //ClienteView clienteView = new ClienteView();
     ClienteView clienteView = new ClienteView();
     boolean login = false;
     private Main m;
@@ -31,7 +32,7 @@ public class Controlador implements ActionListener{
     public Controlador(Main m){
         loginView.setVisible(true);
         loginView.addListener(this, loginView.getB_Login());
-        loginView.addListener(this, clienteView.getB_Enviar());
+        //loginView.addListener(this, clienteView.getB_Enviar());
         this.m = m;
     }
 
@@ -111,12 +112,9 @@ public class Controlador implements ActionListener{
             else{
                 loginView.aprensentarAlerta("Erro", "Certifique-se de que preencheu os dados corretamente e tente novamente!");
             }
-            /*if("123".equals(loginView.getPass()) && "Tony".equals(loginView.getUser())){
-                loginView.loginAceite(); // IR À LOCAL BD VER SE É ACEITE
-            }*/
 
-        }else if(origem == clienteView.getB_Enviar()){
+        }/*else if(origem == clienteView.getB_Enviar()){
             System.out.println(clienteView.getMsg());
-        }
+        }*/
     }
 }

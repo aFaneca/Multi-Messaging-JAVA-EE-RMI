@@ -4,100 +4,74 @@ import Controlador.Servidor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 public class ClienteView extends JFrame implements Observer {
-    int x = 300;
-    int y = 250;
+    JPanel panel_chat, panel_listaDeUsers;
+    int x = 300, y = 250;
 
-    JLabel contactos;
-    JLabel caixaDeChat;
-    JTextArea chat;
-    Dimension chatDim;
-    JLabel msg;
-    JButton msgButton;
-    Dimension opsDim;
-    String mensagem = null;
-    DefaultListModel<String> listaDeUtilizadores;
-
-    public ClienteView(){
+    public ClienteView() {
         super();
+
         this.setTitle("PD");
         this.setResizable(false);
 
-        //window settings
-        setLayout(null);
+        // window settings - main JFrame
+        setLayout(new BorderLayout());
         setSize(950,670);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        getContentPane().setBackground(new java.awt.Color(135, 206, 250));
+        getContentPane().setBackground(new Color(135, 206, 250));
 
-        //
+        // window settings - panel_listaDeUsers
+        panel_listaDeUsers = new JPanel();
+        panel_listaDeUsers.setBackground(new Color(0,0,0));
+        configuraListaDeUsersPanel(null);
+
+        // window settings - panel_chat
+        panel_chat = new JPanel();
+        panel_chat.setBackground(new Color(255,255,255));
+        configuraChatPanel();
 
 
+        this.add(panel_listaDeUsers, BorderLayout.EAST);
+        this.add(panel_chat, BorderLayout.SOUTH);
 
-        configuraContatos(new ArrayList<String>());
-
-
-
-
+        //this.setVisible(true);
     }
 
-    private void configuraContatos(ArrayList<String> lista){
-        //removeAll();
-        caixaDeChat = new JLabel();
-        chat = new JTextArea();
-        chatDim = new Dimension(400,200);
-        msgButton = new JButton("Enviar");
-        msg = new JLabel();
-        opsDim = new Dimension(200,32);
+    private void configuraListaDeUsersPanel(ArrayList<String> lista) {
+        panel_listaDeUsers.removeAll();
+        if(lista == null) lista = new ArrayList<String>();
+        panel_listaDeUsers.add(new JLabel("Users:"));
+        String msg = "";
 
-        contactos = new JLabel();
-        listaDeUtilizadores = new DefaultListModel();
-        System.out.println("----------");
-        for(String username : lista ){
-            listaDeUtilizadores.addElement(username);
-            System.out.println(username);
+        for(String username : lista){
+            msg += username + "\n";
         }
-        System.out.println("----------");
-        JList uA = new JList(listaDeUtilizadores);
 
-        contactos.setBounds(x+50,y-100, 250,375);
-        contactos.setLayout(new FlowLayout());
-        contactos.add(uA);
-        contactos.setVisible(true);
-        add(contactos);
-
-        caixaDeChat.setBounds(x,y+100,400,200);
-        caixaDeChat.setLayout(new FlowLayout());
-        chat.setPreferredSize(chatDim); // 400 200
-        caixaDeChat.add(chat);
-        add(caixaDeChat);
-
-        msg.setBounds(x,y+300,200,40);
-        msg.setLayout(new FlowLayout());
-        msgButton.setPreferredSize(opsDim);
-        msg.add(msgButton);
-        add(msg);
+        panel_listaDeUsers.add(new JLabel(msg));
         revalidate();
         repaint();
+    }
+
+    private void configuraChatPanel(){
+        panel_chat.add(new JLabel("CHAT"));
 
     }
+
     @Override
     public void update(Observable o, Object arg) {
         Servidor s = (Servidor) arg;
-        configuraContatos((ArrayList) s.getListaDeUsernames());
+        configuraListaDeUsersPanel((ArrayList) s.getListaDeUsernames());
 
 
     }
-    public void addListener(ActionListener cont, JButton b){
-        b.addActionListener(cont);
-    }
+
     public void aprensentarAlerta(String tipo, String msg) {
 
         switch(tipo){
@@ -109,12 +83,6 @@ public class ClienteView extends JFrame implements Observer {
                 break;
         }
     }
-    /* Getters & Setters */
-    public JButton getB_Enviar(){
-        mensagem = chat.getText();
-        return msgButton;
-    }
-    public String getMsg(){
-        return mensagem;
-    }
+
+
 }
