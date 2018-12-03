@@ -143,5 +143,18 @@ public class UtilizadorDao {
 
 
     public static void desautenticarUtilizador(String username) {
+        String sql = "UPDATE " + nomeDaTabela +
+                " SET estado = 'Inativo'" +
+                "WHERE username = ?";
+
+        try {
+            PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
+            ps.setString(1, username);
+
+            ps.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilizadorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

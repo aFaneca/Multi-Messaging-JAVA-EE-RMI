@@ -35,7 +35,13 @@ public class Conexao {
         return socket;
     }
 
-    public void fecharSocket() throws IOException {
-        socket.close();
+    public void fecharSocket() {
+        if(socket.isConnected()) {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

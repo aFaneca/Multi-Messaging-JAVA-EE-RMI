@@ -15,7 +15,6 @@ public class Constantes implements Serializable {
         SAIR
     }
 
-
     /*public class TIPOS{
         public static final String AUTH = "AUTH";
         public static final String SAIR = "SAIR";

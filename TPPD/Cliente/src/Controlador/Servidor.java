@@ -17,6 +17,7 @@ public class Servidor extends Observable{
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
     protected List<Utilizador> listaDeUtilizadores;
+    protected String username;
 
     public Servidor(String serverName, int serverPort) {
 
@@ -82,7 +83,8 @@ public class Servidor extends Observable{
 
     public void fecharConexao(){
         try {
-            s.close();
+            if(s.isConnected())
+                s.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -106,9 +108,11 @@ public class Servidor extends Observable{
                     msg = (MSG) in.readObject();
                     processaMsg(msg);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Ligação terminada com o servidor.");
+                    break;
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
+                    break;
                 }
 
             }
@@ -189,5 +193,13 @@ public class Servidor extends Observable{
         }
 
         return lista;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String utilizador) {
+        this.username = utilizador;
     }
 }

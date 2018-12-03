@@ -8,6 +8,7 @@ import Modelo.MSG;
 import Modelo.Utilizador;
 
 import java.io.*;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -36,7 +37,10 @@ public class Server {
                 new Thread(new AtendeCliente(c)).start();
             }
 
-        } catch (IOException e) {
+        } catch (BindException e1) {
+            System.out.println("Já existe um server aberto: " + e1.getMessage());
+            System.exit(1);
+        }catch (IOException e) {
             System.out.println("Erro: Criação do ServerSocket");
             e.printStackTrace();
         }
@@ -77,7 +81,15 @@ public class Server {
                 while(true){
                     //in = new ObjectInputStream(s.getInputStream());
                     msg = (MSG) c.receber().readObject(); // Fica à espera de receber um objeto do cliente
-                    processaMsg(msg);
+                    if(msg.getTipo() != Constantes.TIPOS.SAIR)
+                        processaMsg(msg);
+                    else{
+                        clientesConectados.remove(c);
+                        desautenticarUtilizador((String) msg.getObj());
+                        break;
+                    }
+
+
                     System.out.println("Mensagem Enviada!");
                     //in.close();
                     //s.close();
@@ -88,7 +100,7 @@ public class Server {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }finally{
-                clientesConectados.remove(c);
+                    c.fecharSocket();
             }
 
         }
@@ -136,6 +148,7 @@ public class Server {
 
         private void desautenticarUtilizador(String username) {
             UtilizadorDao.desautenticarUtilizador(username);
+            processaUserList();
         }
 
         public void enviarParaCliente(MSG msg){

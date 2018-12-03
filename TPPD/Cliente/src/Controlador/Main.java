@@ -6,6 +6,8 @@ import java.io.*;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import GUI.ClienteView;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
@@ -14,7 +16,7 @@ public class Main implements Observable{
 
     public Main(){
         Controlador c = new Controlador(this);
-        //acedeAoServer();
+        //new ClienteView().setVisible(true);
     }
 
     public static void main(String args[]){

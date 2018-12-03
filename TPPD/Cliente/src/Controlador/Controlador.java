@@ -14,7 +14,10 @@ import GUI.LoginView;
 import Modelo.Auth;
 import Modelo.Constantes;
 import Modelo.MSG;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import javafx.beans.InvalidationListener;
+
+import javax.swing.*;
 
 /**
  *
@@ -32,17 +35,9 @@ public class Controlador implements ActionListener{
     public Controlador(Main m){
         loginView.setVisible(true);
         loginView.addListener(this, loginView.getB_Login());
+        clienteView.addListener(this, clienteView.getBtn_sair());
         //loginView.addListener(this, clienteView.getB_Enviar());
         this.m = m;
-    }
-
-
-    public void addListener(InvalidationListener il) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void removeListener(InvalidationListener il) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
@@ -72,6 +67,7 @@ public class Controlador implements ActionListener{
             // 4 - Toma decisão de acordo com a resposta recebida
             if((Boolean) msg.getObj()){
                 // Se a resposta do server é positiva => login é válido
+                server.setUsername(username);
                 fazLogin();
             }else{
                 // Senão => login não é válido
@@ -87,6 +83,7 @@ public class Controlador implements ActionListener{
     private void fazLogin() {
         loginView.setVisible(false);
         clienteView.setVisible(true);
+        clienteView.setAcaoNoFechoDaJanela(this);
         pedeInfoInicial();
     }
     /* Pede ao Servidor info inicial */
@@ -113,8 +110,21 @@ public class Controlador implements ActionListener{
                 loginView.aprensentarAlerta("Erro", "Certifique-se de que preencheu os dados corretamente e tente novamente!");
             }
 
-        }/*else if(origem == clienteView.getB_Enviar()){
-            System.out.println(clienteView.getMsg());
-        }*/
+        }else if(origem == clienteView.getBtn_sair()){
+            // Terminar Sessão
+            terminarSessao();
+        }
+    }
+
+
+    public void janelaVaiFechar(){
+        terminarSessao();
+    }
+
+    private void terminarSessao() {
+        server.enviarParaServidor(new MSG(Constantes.TIPOS.SAIR, server.getUsername()));
+        server.fecharConexao();
+        clienteView.setVisible(false);
+        loginView.setVisible(true);
     }
 }
