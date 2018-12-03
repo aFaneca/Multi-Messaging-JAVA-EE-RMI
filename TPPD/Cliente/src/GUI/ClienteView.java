@@ -10,6 +10,7 @@ import java.util.Observer;
 
 public class ClienteView extends JFrame implements Observer {
     JPanel panel_chat, panel_listaDeUsers;
+    JList list_utilizadores;
     int x = 300, y = 250;
 
     public ClienteView() {
@@ -29,6 +30,7 @@ public class ClienteView extends JFrame implements Observer {
 
         // window settings - panel_listaDeUsers
         panel_listaDeUsers = new JPanel();
+
         panel_listaDeUsers.setBackground(new Color(0,0,0));
         configuraListaDeUsersPanel(null);
 
@@ -46,7 +48,14 @@ public class ClienteView extends JFrame implements Observer {
 
     private void configuraListaDeUsersPanel(ArrayList<String> lista) {
         panel_listaDeUsers.removeAll();
-        if(lista == null) lista = new ArrayList<String>();
+        if(lista != null)
+            list_utilizadores = new JList(lista.toArray());
+        else
+            list_utilizadores = new JList();
+        list_utilizadores.setVisibleRowCount(10);
+        list_utilizadores.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        panel_listaDeUsers.add(new JScrollPane(list_utilizadores));
+        /*if(lista == null) lista = new ArrayList<String>();
         panel_listaDeUsers.add(new JLabel("Users:"));
         String msg = "";
 
@@ -54,7 +63,7 @@ public class ClienteView extends JFrame implements Observer {
             msg += username + "\n";
         }
 
-        panel_listaDeUsers.add(new JLabel(msg));
+        panel_listaDeUsers.add(new JLabel(msg));*/
         revalidate();
         repaint();
     }

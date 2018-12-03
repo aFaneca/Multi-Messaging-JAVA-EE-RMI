@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="342423dc-515b-4f45-97f8-a81292a8d6bd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Cliente/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Controlador/Controlador.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Controlador/Controlador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/GUI/ClienteView.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/GUI/ClienteView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/src/Controlador/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/src/Controlador/Controlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/src/GUI/ClienteView.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -70,8 +65,9 @@
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.23" value="1" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -101,7 +97,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DAO/Conector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
+            <state relative-caret-position="286">
               <caret line="19" column="63" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -158,7 +154,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controlador/Conexao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
+            <state relative-caret-position="506">
               <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -229,8 +225,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
+    <option name="x" value="-1929" />
+    <option name="y" value="-361" />
     <option name="width" value="1938" />
     <option name="height" value="1060" />
   </component>
@@ -242,6 +238,23 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TPPD-Server" type="58d84e3e:PackageViewProjectNode" />
+              <item name="TPPD" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="TPPD-Server" type="58d84e3e:PackageViewProjectNode" />
+              <item name="TPPD" type="616d4139:PackageViewModuleNode" />
+              <item name="Controlador" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -280,23 +293,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="TPPD-Server" type="58d84e3e:PackageViewProjectNode" />
-              <item name="TPPD" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="TPPD-Server" type="58d84e3e:PackageViewProjectNode" />
-              <item name="TPPD" type="616d4139:PackageViewModuleNode" />
-              <item name="Controlador" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -377,11 +373,12 @@
       <workItem from="1543778332501" duration="206000" />
       <workItem from="1543780191005" duration="385000" />
       <workItem from="1543780629022" duration="26000" />
+      <workItem from="1543869118712" duration="660000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34597000" />
+    <option name="totallyTimeSpent" value="35257000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -393,11 +390,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
+    <frame x="-1929" y="-361" width="1938" height="1060" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.86868685" visible="true" weight="0.16380237" />
-      <window_info id="Structure" order="1" sideWeight="0.13131313" side_tool="true" visible="true" weight="0.16380237" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8256705" visible="true" weight="0.1659506" />
+      <window_info id="Structure" order="1" sideWeight="0.1743295" side_tool="true" visible="true" weight="0.1659506" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
@@ -406,7 +403,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.41414142" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.41414142" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.46127945" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -611,7 +608,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DAO/Conector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
+        <state relative-caret-position="286">
           <caret line="19" column="63" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -648,7 +645,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controlador/Conexao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
+        <state relative-caret-position="506">
           <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
