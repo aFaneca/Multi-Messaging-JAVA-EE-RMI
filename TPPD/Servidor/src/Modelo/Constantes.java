@@ -19,6 +19,10 @@ public class Constantes implements Serializable {
         SAIR
     }
 
+    /* SEND_PRIVATE_CHAT_MESSAGE */
+    public static final String MENSAGEM_TEXTO = "MENSAGEM_TEXTO";
+    public static final String MENSAGEM_REMETENTE = "MENSAGEM_REMETENTE";
+    public static final String MENSAGEM_CHAT_PRIVADO = "MENSAGEM_CHAT_PRIVADO";
 
     /*public class TIPOS{
         public static final String AUTH = "AUTH";

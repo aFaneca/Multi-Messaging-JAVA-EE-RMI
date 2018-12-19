@@ -9,7 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import GUI.ChatView;
 import GUI.ClienteView;
@@ -181,13 +183,20 @@ public class Controlador implements ActionListener{
         return server;
     }
 
-    public void enviarMensagemChatPrivado(ChatPrivado chatPrivado, String text) {
+    public void enviarMensagemChatPrivado(ChatPrivado chatPrivado, String text, String username) {
 
         /* OBJETO A ENVIAR */
-        List<Object> objs = new ArrayList<>();
-        objs.add(text);
-        objs.add(chatPrivado);
+        /*List<Object> objs = new ArrayList<>();
 
-        server.enviarParaServidor(new MSG(Constantes.TIPOS.SEND_PRIVATE_CHAT_MESSAGE, objs));
+        objs.add(text);
+        objs.add(chatPrivado);*/
+
+        Map<String, Object> obj= new HashMap<>();
+        obj.put(Constantes.MENSAGEM_TEXTO, text);
+        obj.put(Constantes.MENSAGEM_REMETENTE, username);
+        obj.put(Constantes.MENSAGEM_CHAT_PRIVADO, chatPrivado);
+
+
+        server.enviarParaServidor(new MSG(Constantes.TIPOS.SEND_PRIVATE_CHAT_MESSAGE, obj));
     }
 }

@@ -61,7 +61,7 @@ public class ChatView extends JFrame implements Observer {
                 String date = new SimpleDateFormat("yyyy/MM/dd - HH:mm:ss").format(Calendar.getInstance().getTime());
                 String s1 = null;*/
 
-                c.enviarMensagemChatPrivado(getChatPrivado(), zonaChat.getText());
+                c.enviarMensagemChatPrivado(getChatPrivado(), zonaChat.getText(), getUsername());
                 zonaChat.setText("");
             }
         });
@@ -89,6 +89,7 @@ public class ChatView extends JFrame implements Observer {
         for(Mensagem msg : chatPrivado.getMensagens()){
             str += "[" + msg.getData();
             str += "] ";
+            str += msg.getUsernameRemetente() + " - ";
             str += msg.getMensagem();
             str += "<br/>";
         }
@@ -124,6 +125,9 @@ public class ChatView extends JFrame implements Observer {
         return userDestino;
     }
 
+    public String getUsername(){
+        return user;
+    }
 
     public JButton getBtn_Enviar(){return btn_enviar;}
 

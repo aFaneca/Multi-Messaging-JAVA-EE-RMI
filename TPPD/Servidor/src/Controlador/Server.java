@@ -9,10 +9,7 @@ import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
+import java.util.*;
 
 
 public class Server {
@@ -125,9 +122,14 @@ public class Server {
         }
 
         private void processaNovaMensagemChat(MSG msg){
-            List<Object> objs = (ArrayList) msg.getObj();
-            String mensagem = "";
             ChatPrivado cp = null;
+            String mensagem = "";
+            String username = "";
+            Utilizador utilizadorRemetente = null;
+            String data = "";
+            /*List<Object> objs = (ArrayList) msg.getObj();
+
+
 
             for(Object o : objs) {
                 if (o instanceof String)
@@ -135,7 +137,17 @@ public class Server {
                 else
                     cp = (ChatPrivado) o;
             }
-            cp.addMessage(new Mensagem(null, mensagem, getDate()));
+            cp.addMessage(new Mensagem(null, mensagem, getDate()));*/
+
+            Map<String, Object> obj = (HashMap) msg.getObj();
+            cp = (ChatPrivado) obj.get(Constantes.MENSAGEM_CHAT_PRIVADO);
+            mensagem = (String) obj.get(Constantes.MENSAGEM_TEXTO);
+            username = (String) obj.get(Constantes.MENSAGEM_REMETENTE);
+            utilizadorRemetente = UtilizadorDao.recuperar(username);
+            data = getDate();
+
+            cp.addMessage(new Mensagem(utilizadorRemetente, mensagem, data));
+
             ChatPrivado cp2 = cp;
             enviarParaTodosOsClientes(new MSG(Constantes.TIPOS.NEW_PRIVATE_CHAT_MESSAGE, cp));
 

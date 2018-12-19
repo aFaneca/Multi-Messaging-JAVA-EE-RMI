@@ -29,6 +29,9 @@ public class Mensagem implements Serializable {
         return fromUser;
     }
 
+    public String getUsernameRemetente(){
+        return fromUser.getUsername();
+    }
 
     public String getMensagem() {
         return mensagem;
