@@ -56,10 +56,10 @@ public class ChatView extends JFrame implements Observer {
         btn_enviar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String s = null;
+/*                String s = null;
                 String [] arr = null;
                 String date = new SimpleDateFormat("yyyy/MM/dd - HH:mm:ss").format(Calendar.getInstance().getTime());
-                String s1 = null;
+                String s1 = null;*/
 
                 c.enviarMensagemChatPrivado(getChatPrivado(), zonaChat.getText());
                 zonaChat.setText("");
@@ -87,6 +87,8 @@ public class ChatView extends JFrame implements Observer {
         String str = "<html>";
 
         for(Mensagem msg : chatPrivado.getMensagens()){
+            str += "[" + msg.getData();
+            str += "] ";
             str += msg.getMensagem();
             str += "<br/>";
         }

@@ -8,7 +8,9 @@ import java.io.*;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -133,7 +135,7 @@ public class Server {
                 else
                     cp = (ChatPrivado) o;
             }
-            cp.addMessage(new Mensagem(null, mensagem));
+            cp.addMessage(new Mensagem(null, mensagem, getDate()));
             ChatPrivado cp2 = cp;
             enviarParaTodosOsClientes(new MSG(Constantes.TIPOS.NEW_PRIVATE_CHAT_MESSAGE, cp));
 
@@ -193,5 +195,8 @@ public class Server {
                 e.printStackTrace();
             }
         }
+    }
+    private String getDate() {
+        return new SimpleDateFormat("yyyy/MM/dd - HH:mm:ss").format(Calendar.getInstance().getTime());
     }
 }
