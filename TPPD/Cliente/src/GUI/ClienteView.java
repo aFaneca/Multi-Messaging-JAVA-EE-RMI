@@ -124,7 +124,7 @@ public class ClienteView extends JFrame implements Observer {
     public void update(Observable o, Object arg) {
 
         Servidor s = (Servidor) arg;
-        boolean flag = false;
+        boolean verificaSeConversaJaExiste = false;
 
         if(s.getUpdateLista() == true){
             configuraListaDeUsersPanel((ArrayList) s.getListaDeUsernames());
@@ -134,12 +134,11 @@ public class ClienteView extends JFrame implements Observer {
             for(ChatView u: usersChat){
                 if(u.getUserDestino().equals(s.getOrigem())){
                     u.setConversacionText(s.getMensagem());
-                   // u.revalidate();
-                    //u.repaint();
-                    flag = true;
+                    verificaSeConversaJaExiste = true;
+                    break;
                 }
             }
-            if(flag == false){
+            if(verificaSeConversaJaExiste == false){
                 adicionaUsersChat(s.getUsername(),s.getOrigem(), s.getMensagem());
             }
         }
@@ -190,12 +189,4 @@ public class ClienteView extends JFrame implements Observer {
         return false;
     }
 
-    public String getZonaChatText(String userDestino) {
-        for(ChatView cV: usersChat){
-            if(cV.getUserDestino() == userDestino){
-                return cV.getGuardaZonaChat();
-            }
-        }
-        return null;
-    }
 }
