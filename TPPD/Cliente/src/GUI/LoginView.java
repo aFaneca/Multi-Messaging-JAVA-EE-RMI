@@ -34,6 +34,8 @@ public class LoginView extends JFrame implements Observer {
     JLabel textServers = new JLabel();
     JLabel textPorts = new JLabel();
 
+    JLabel menuInicial = new JLabel();
+
 
     String user = null;
     String pass = null;
@@ -103,6 +105,10 @@ public class LoginView extends JFrame implements Observer {
 
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public void addListener(ActionListener cont, JButton b){
         b.addActionListener(cont);
@@ -122,6 +128,7 @@ public class LoginView extends JFrame implements Observer {
 
         return loginButton;
     }
+
 
     public String getServerName() {
         return this.serverName.getText();
@@ -146,11 +153,5 @@ public class LoginView extends JFrame implements Observer {
             default: JOptionPane.showMessageDialog(this, msg, "Informação", JOptionPane.INFORMATION_MESSAGE);
                 break;
         }
-    }
-
-
-    @Override
-    public void update(Observable o, Object arg) {
-
     }
 }

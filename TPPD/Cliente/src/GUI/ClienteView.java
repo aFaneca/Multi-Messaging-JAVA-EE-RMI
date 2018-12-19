@@ -4,6 +4,7 @@ import Controlador.Controlador;
 import Controlador.Servidor;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class ClienteView extends JFrame implements Observer {
         super();
         this.c = c;
 
-        this.setTitle("PD" );
+        this.setTitle("PD");
         this.setResizable(false);
 
         // window settings - main JFrame
@@ -124,7 +125,10 @@ public class ClienteView extends JFrame implements Observer {
     public void update(Observable o, Object arg) {
 
         Servidor s = (Servidor) arg;
-        boolean verificaSeConversaJaExiste = false;
+
+        configuraListaDeUsersPanel((ArrayList) s.getListaDeUsernames());
+
+        /*boolean flag = false;
 
         if(s.getUpdateLista() == true){
             configuraListaDeUsersPanel((ArrayList) s.getListaDeUsernames());
@@ -133,26 +137,27 @@ public class ClienteView extends JFrame implements Observer {
         if(s.getUpdateChats() == true){
             for(ChatView u: usersChat){
                 if(u.getUserDestino().equals(s.getOrigem())){
-                    u.setConversacionText(s.getMensagem());
-                    verificaSeConversaJaExiste = true;
-                    break;
+                    u.setConversationText(s.getMensagem());
+                    u.revalidate();
+                    u.repaint();
+                    flag = true;
                 }
             }
-            if(verificaSeConversaJaExiste == false){
+            if(flag == false){
                 adicionaUsersChat(s.getUsername(),s.getOrigem(), s.getMensagem());
             }
-        }
+        }*/
     }
 
     public void addListener(ActionListener cont, JButton b){
         b.addActionListener(cont);
     }
 
-    public void adicionaUsersChat(String user, String userDestino, String mensagem){
+    /*public void adicionaUsersChat(String user, String userDestino, String mensagem){
         ChatView cv =  new ChatView(user, userDestino, c, mensagem);
         usersChat.add(cv);
 
-    }
+    }*/
 
     public void aprensentarAlerta(String tipo, String msg) {
 
@@ -169,7 +174,10 @@ public class ClienteView extends JFrame implements Observer {
     /* Getters & Setters */
 
     public String nomeSelecionado(){
-        return (String) list_utilizadores.getSelectedValue();
+        if(list_utilizadores.getSelectedValue() != null)
+            return (String) list_utilizadores.getSelectedValue();
+
+        return null;
     }
 
     public JButton getBtn_Sair() {
@@ -189,4 +197,12 @@ public class ClienteView extends JFrame implements Observer {
         return false;
     }
 
+    public String getZonaChatText(String userDestino) {
+        for(ChatView cV: usersChat){
+            if(cV.getUserDestino() == userDestino){
+                return cV.getGuardaZonaChat();
+            }
+        }
+        return null;
+    }
 }

@@ -6,6 +6,7 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -39,8 +40,20 @@ public class Utilizador implements Serializable {
         this.enderecoIP = enderecoIP;
     }
 
-    
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Utilizador that = (Utilizador) o;
+        return Objects.equals(username, that.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
+    }
+
     public String getUsername() {
         return username;
     }
@@ -88,5 +101,6 @@ public class Utilizador implements Serializable {
     public void setEnderecoIP(String enderecoIP) {
         this.enderecoIP = enderecoIP;
     }
-
+    
+    
 }

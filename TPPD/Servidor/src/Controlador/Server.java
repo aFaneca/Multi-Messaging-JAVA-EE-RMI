@@ -7,8 +7,11 @@ import Modelo.*;
 import java.io.*;
 import java.net.BindException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class Server {
     protected static final int SERVER_PORT = 9997;
@@ -41,10 +44,7 @@ public class Server {
     }
 
     private void enviarParaTodosOsClientes(MSG msg){
-        /*System.out.println("klklkl: " + msg);*/
         for(Conexao cliente : clientesConectados){
-            //System.out.println(cliente.getSocket().getPort());
-
             try {
                 cliente.enviar().writeObject(msg);
                 cliente.enviar().flush();
@@ -70,6 +70,7 @@ public class Server {
             }
         }
 
+
         public void run(){
             System.out.println("Conectado a partir de " + c.getSocket().getInetAddress());
             try{
@@ -84,6 +85,7 @@ public class Server {
                         break;
                     }
 
+
                     System.out.println("Mensagem Enviada!");
                     //in.close();
                     //s.close();
@@ -96,6 +98,7 @@ public class Server {
             }finally{
                     c.fecharSocket();
             }
+
         }
 
         private void processaMsg(MSG msg) {
@@ -107,39 +110,46 @@ public class Server {
                 case GET_USER_LIST:
                     processaUserList();
                     break;
-                case GET_MENSAGEM:
-                    enviarMensagemParaUmCliente(msg);
+                case BEGIN_CHAT:
+                    processaChat(msg);
+                    break;
+                case SEND_PRIVATE_CHAT_MESSAGE:
+                    processaNovaMensagemChat(msg);
+                    break;
                 default:
                     break;
             }
+
         }
 
+        private void processaNovaMensagemChat(MSG msg){
+            List<Object> objs = (ArrayList) msg.getObj();
+            String mensagem = "";
+            ChatPrivado cp = null;
 
-        private void enviarMensagemParaUmCliente(MSG msg) {
-            Mensagem mensagem = (Mensagem)  msg.getObj();
-            int portaTCPDestino = UtilizadorDao.getClienteTCP(mensagem.getDestino());
-            System.out.println("A ENVIAR PARA DE: " + mensagem.getOrigem() + "PARA: " + mensagem.getDestino() + " " + portaTCPDestino + " - " + mensagem.getMensagemString());
-
-            StringBuilder stringBuilder = new StringBuilder();
-
-            stringBuilder.append(mensagem.getOrigem());
-            stringBuilder.append(" ");
-            stringBuilder.append(mensagem.getMensagemString());
-
-            String finalString = stringBuilder.toString();
-
-            for(Conexao cliente : clientesConectados){
-               if(cliente.getSocket().getPort() == portaTCPDestino){
-                  try {
-                       cliente.enviar().writeObject(new MSG(Constantes.TIPOS.GET_MENSAGEM_REPLY, finalString));
-                       cliente.enviar().flush();
-                   } catch (IOException e) {
-                      e.printStackTrace();
-                    }
-                }
+            for(Object o : objs) {
+                if (o instanceof String)
+                    mensagem = (String) o;
+                else
+                    cp = (ChatPrivado) o;
             }
+            cp.addMessage(new Mensagem(null, mensagem));
+            ChatPrivado cp2 = cp;
+            enviarParaTodosOsClientes(new MSG(Constantes.TIPOS.NEW_PRIVATE_CHAT_MESSAGE, cp));
+
         }
 
+        private void processaChat(MSG msg){
+            List<String> usernames = (ArrayList) msg.getObj();
+            List<Utilizador> users = new ArrayList<>();
+
+            for(String u : usernames){
+                users.add(UtilizadorDao.recuperar(u));
+            }
+
+            ChatPrivado cp = new ChatPrivado(users);
+            enviarParaTodosOsClientes(new MSG(Constantes.TIPOS.BEGIN_CHAT_REPLY, cp));
+        }
 
         private void processaUserList() {
             List<Utilizador> lista= UtilizadorDao.recuperarTodosOsUtilizadores();
@@ -176,6 +186,7 @@ public class Server {
             try {
                 //out = new ObjectOutputStream(s.getOutputStream()); // stream de saída
                 c.enviar().writeObject(msg);
+                c.enviar().reset();
                 c.enviar().flush();
                 //out.close();
             } catch (IOException e) {

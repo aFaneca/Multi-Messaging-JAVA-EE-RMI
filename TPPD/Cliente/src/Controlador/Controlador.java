@@ -9,25 +9,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-
+import GUI.ChatView;
 import GUI.ClienteView;
 import GUI.LoginView;
-import Modelo.Auth;
-import Modelo.Constantes;
-import Modelo.MSG;
-import Modelo.Mensagem;
+import Modelo.*;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import javafx.beans.InvalidationListener;
+
+import javax.swing.*;
 
 /**
  *
  * @author Ricardo Marques
  */
-public class Controlador  implements ActionListener{
+public class Controlador implements ActionListener{
 
     LoginView loginView = new LoginView();
+    //ClienteView clienteView = new ClienteView();
     ClienteView clienteView = new ClienteView(this);
-
-    Controlador c;
+    boolean login = false;
     private Main m;
     Servidor server;
 
@@ -36,15 +38,17 @@ public class Controlador  implements ActionListener{
         loginView.addListener(this, loginView.getB_Login());
         clienteView.addListener(this, clienteView.getBtn_Sair());
         clienteView.addListener(this, clienteView.getBtn_Chat());
+        //loginView.addListener(this, clienteView.getB_Enviar());
         this.m = m;
-        this.c = this;
     }
 
 
     private void tentaLogin(String username, String password, String serverName, int serverPort){
+        /*loginView.aprensentarAlerta("Info", "Username: " + username + "\nPassword: "
+                + password + "\n" + "Server: " + serverName + "\n Port: " + serverPort);*/
 
         // 1 - Tenta conexão com o server
-        server = new Servidor(serverName, serverPort);
+        server = new Servidor(this, serverName, serverPort);
         if(server.testaConexão()){
             loginView.aprensentarAlerta("Info", "Conexão Estabelecida!");
         }else{
@@ -56,7 +60,7 @@ public class Controlador  implements ActionListener{
 
         // 2 - Envia username + password para o server
         server.conectar();
-        server.enviarParaServidor(new MSG(Constantes.TIPOS.AUTH, new Auth(username, password, this.server.getPortoPessoal(), serverPort, serverName)));
+        server.enviarParaServidor(new MSG(Constantes.TIPOS.AUTH, new Auth(username, password, serverPort, serverPort, serverName)));
 
         // 3 - Espera por resposta
         try {
@@ -82,6 +86,7 @@ public class Controlador  implements ActionListener{
         loginView.setVisible(false);
         clienteView.setVisible(true);
         clienteView.setAcaoNoFechoDaJanela(this);
+        clienteView.setTitle("PD - " + getServer().getUsername());
         pedeInfoInicial();
     }
     /* Pede ao Servidor info inicial */
@@ -95,10 +100,11 @@ public class Controlador  implements ActionListener{
         return true;
     }
 
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object origem = e.getSource();
-
         //Menu iniciar
         if(origem == loginView.getB_Login()){
             if(validaLogin(loginView.getUser(), loginView.getPass(), loginView.getServerName(), loginView.getServerPort()))
@@ -111,27 +117,54 @@ public class Controlador  implements ActionListener{
             // Terminar Sessão
             terminarSessao();
         }else if(origem == clienteView.getBtn_Chat()){
-            String userDestino = clienteView.nomeSelecionado().substring(0, clienteView.nomeSelecionado().lastIndexOf(" "));
-            String ultimaPalavra = clienteView.nomeSelecionado().substring(clienteView.nomeSelecionado().lastIndexOf(" ") + 1);
+            String userDestino = null;
+            String userStatus = null;
 
-            if(userDestino != null && ultimaPalavra.equals("[Ativo]") && !userDestino.equals(loginView.getUser())) {
-                //fazer warnings
-                if(clienteView.verificaChatExistente(userDestino) == false){
-                    clienteView.adicionaUsersChat(loginView.getUser(), userDestino, "");
-                }else{
-                    System.out.println("Não criei chat");
-                }
+            if(clienteView.nomeSelecionado() == null) return; // this means no name was selected
+            userDestino = clienteView.nomeSelecionado().substring(0, clienteView.nomeSelecionado().lastIndexOf(" ["));
+            userStatus = clienteView.nomeSelecionado().substring(clienteView.nomeSelecionado().lastIndexOf("[ "));
+
+            if(userDestino != null && userStatus.equals("[ Ativo ]")){
+                iniciarChat(userDestino);
             }
+
+
+
+            /*
+            String userDestino = null;
+            String ultimaPalavra = null;
+
+            if(clienteView.nomeSelecionado() == null) return; // this means no name was selected
+
+            userDestino = clienteView.nomeSelecionado().substring(0, clienteView.nomeSelecionado().lastIndexOf(" "));
+            ultimaPalavra = clienteView.nomeSelecionado().substring(clienteView.nomeSelecionado().lastIndexOf(" ") + 1);
+
+            List<Utilizador> utilizadoresNoChat = new ArrayList<>();
+
+            ChatPrivado chatPrivado = new ChatPrivado(null);
+
+            ChatView cv = new ChatView(server.getUsername(), "jo", chatPrivado);
+            */
         }
     }
 
-    public void mensagemAEnviar(String userDestino, String mensagem) {
-        System.out.println("De: " + loginView.getUser() + " Para:" + userDestino +" ->" + mensagem);
-        server.enviarParaServidor(new MSG(Constantes.TIPOS.GET_MENSAGEM, new Mensagem(loginView.getUser(),  loginView.getServerPort(), loginView.getServerPort() ,loginView.getServerName(),userDestino, mensagem)));
+    private void iniciarChat(String userDestino) {
+        List<String> users = new ArrayList<>();
+        users.add(server.getUsername());
+        users.add(userDestino);
+
+        server.enviarParaServidor(new MSG(Constantes.TIPOS.BEGIN_CHAT, users));
     }
+
 
     public void janelaVaiFechar(){
         terminarSessao();
+    }
+
+    public void janelaDeChatVaiFechar(ChatView view, ChatPrivado cp){
+        server.listaDeChatsPrivados.remove(cp);
+        server.listaDeChatViews.remove(view);
+
     }
 
     private void terminarSessao() {
@@ -141,4 +174,20 @@ public class Controlador  implements ActionListener{
         loginView.setVisible(true);
     }
 
+
+    /* Getters & Setters */
+
+    public Servidor getServer() {
+        return server;
+    }
+
+    public void enviarMensagemChatPrivado(ChatPrivado chatPrivado, String text) {
+
+        /* OBJETO A ENVIAR */
+        List<Object> objs = new ArrayList<>();
+        objs.add(text);
+        objs.add(chatPrivado);
+
+        server.enviarParaServidor(new MSG(Constantes.TIPOS.SEND_PRIVATE_CHAT_MESSAGE, objs));
+    }
 }

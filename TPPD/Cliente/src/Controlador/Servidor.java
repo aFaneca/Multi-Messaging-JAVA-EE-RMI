@@ -1,9 +1,12 @@
 package Controlador;
 
+import GUI.ChatView;
+import Modelo.ChatPrivado;
 import Modelo.Constantes;
 import Modelo.MSG;
 import Modelo.Utilizador;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -17,27 +20,23 @@ public class Servidor extends Observable{
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
     protected List<Utilizador> listaDeUtilizadores;
-    protected String mensagem;
-    protected String origem;
+    protected List<ChatPrivado> listaDeChatsPrivados;
+    protected List<ChatView> listaDeChatViews;
     protected String username;
-    protected boolean updateLista = true;
-    protected boolean updateChats = true;
+    Controlador c;
 
-
-    public Servidor(String serverName, int serverPort) {
-
+    public Servidor(Controlador c, String serverName, int serverPort) {
+        this.c = c;
         this.serverName = serverName;
         this.serverPort = serverPort;
-        this.listaDeUtilizadores = new ArrayList<>();
+        this.listaDeUtilizadores = new ArrayList<Utilizador>();
+        this.listaDeChatsPrivados = new ArrayList<>();
+        this.listaDeChatViews = new ArrayList<>();
     }
 
     private void notificaObservadores(){
         setChanged();
         notifyObservers(this);
-    }
-
-    public int getPortoPessoal(){
-        return s.getLocalPort();
     }
 
 
@@ -67,7 +66,9 @@ public class Servidor extends Observable{
         try {
             //out = new ObjectOutputStream(s.getOutputStream()); // stream de saída
             out.writeObject(msg);
+            out.reset();
             out.flush();
+
             //out.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,6 +100,25 @@ public class Servidor extends Observable{
         }
     }
 
+    public ChatPrivado getChatPrivado(String user, String userDestino) {
+        ChatPrivado cp = null;
+        int match = 0;
+
+        for(ChatPrivado c : listaDeChatsPrivados){
+            for(Utilizador u : c.getUsers()){
+                if(u.getUsername().equalsIgnoreCase(user) || u.getUsername().equalsIgnoreCase(userDestino))
+                    match++;
+            }
+            if(match == 2){
+                cp = c;
+                break;
+            }else match = 0;
+        }
+
+        return cp;
+    }
+
+
     protected class EscutaServidor implements Runnable{
         private Socket s;
 
@@ -121,6 +141,7 @@ public class Servidor extends Observable{
                     e.printStackTrace();
                     break;
                 }
+
             }
         }
 
@@ -129,40 +150,110 @@ public class Servidor extends Observable{
                 case GET_USER_LIST_REPLY:
                     recebeListaDeUtilizadores(msg);
                     break;
-                case GET_MENSAGEM_REPLY:
-                    recebeMensagem(msg);
+                case BEGIN_CHAT_REPLY:
+                    recebeChatPrivado(msg);
                     break;
-                default:
+                case NEW_PRIVATE_CHAT_MESSAGE:
+                    recebeNovaMensagemChatPrivado(msg);
                     break;
+                default: break;
             }
         }
 
-        private void recebeMensagem(MSG msg) {
+        private void recebeNovaMensagemChatPrivado(MSG msg) {
+            ChatPrivado cv = (ChatPrivado) msg.getObj();
+            boolean isForMe = false;
+            //System.out.println("Recebi chat privado");
+            //System.out.println("MEU USERNAME: " + getUsername());
+            for(Utilizador u : cv.getUsers()) {
+                if (u.getUsername().equalsIgnoreCase(getUsername()))
+                    isForMe = true;
+            }
 
-            mensagem = (String)  msg.getObj();
-            System.out.println(mensagem);
+            if(!isForMe) return;
 
-            String [] arr = mensagem.split(" ", 2);
-            origem = arr[0];
-            mensagem = arr[1];
+            // Janela já está aberta, atualizar só as mensagens
+            for(ChatPrivado cp1 : listaDeChatsPrivados){
+                List<Utilizador> cp1Users = cp1.getUsers();
+                List<Utilizador> cvUsers = cv.getUsers();
+                if(cp1Users.containsAll(cvUsers) &&  cvUsers.containsAll(cp1Users))
+                    //cp1 = cv;
+                    listaDeChatsPrivados.set(listaDeChatsPrivados.indexOf(cp1), cv);
+            }
 
-            updateChats= true;
-            updateLista = false;
+
             notificaObservadores();
-            updateChats=false;
+            //System.out.println("IS FOR ME");
+            /*if(jaExiste){
+                // Janela já está aberta, atualizar só as mensagens
+                listaDeChatsPrivados.set(listaDeChatsPrivados.indexOf(cv), cv);
+                notificaObservadores();
+            }else{
+                // Abrir janela de chat
+                String userDestino = "N/D";
+
+                for(Utilizador u : cv.getUsers()) {
+                    if (!u.getUsername().equalsIgnoreCase(getUsername()))
+                        userDestino = u.getUsername();
+                }
+
+                ChatView cv2 = new ChatView(getUsername(), userDestino, c,  cv);
+                addObserver(cv2);
+                listaDeChatViews.add(cv2);
+
+                // Adicionar à lista de chats
+                listaDeChatsPrivados.add(cv);
+            }*/
+
+        }
+
+        private void recebeChatPrivado(MSG msg) {
+            ChatPrivado cv = (ChatPrivado) msg.getObj();
+            boolean jaExiste = listaDeChatsPrivados.contains(cv);
+            boolean isForMe = false;
+            //System.out.println("Recebi chat privado");
+            //System.out.println("MEU USERNAME: " + getUsername());
+            for(Utilizador u : cv.getUsers()) {
+                if (u.getUsername().equalsIgnoreCase(getUsername()))
+                    isForMe = true;
+            }
+
+            if(!isForMe) return;
+            //System.out.println("IS FOR ME");
+            if(jaExiste){
+                // Janela já está aberta, atualizar só as mensagens
+                for(ChatView v : listaDeChatViews){
+                    if(v.getChatPrivado().equals(cv)){
+                        v.setVisible(true);
+                        break;
+                    }
+                }
+            }else{
+                // Abrir janela de chat
+                String userDestino = "N/D";
+
+                for(Utilizador u : cv.getUsers())
+                    if(!u.getUsername().equalsIgnoreCase(getUsername()))
+                        userDestino = u.getUsername();
+                ChatView cv2 = new ChatView(getUsername(), userDestino, c, cv);
+                addObserver(cv2);
+                listaDeChatViews.add(cv2);
+
+                // Adicionar à lista de chats
+                listaDeChatsPrivados.add(cv);
+            }
+
         }
 
         private void recebeListaDeUtilizadores(MSG msg) {
+
 
             listaDeUtilizadores = (List<Utilizador>) msg.getObj();
 
             for(Utilizador u : listaDeUtilizadores)
                 System.out.println(u.getUsername() + " - " + u.getEstado());
-
-            updateLista = true;
-            updateChats = false;
             notificaObservadores();
-            updateLista = false;
+            
         }
     }
 
@@ -216,7 +307,7 @@ public class Servidor extends Observable{
         List<String> lista = new ArrayList<>();
 
         for(Utilizador u : listaDeUtilizadores){
-            lista.add(u.getUsername() + " [" + u.getEstado() + "]");
+            lista.add(u.getUsername() + " [ " + u.getEstado() + " ]");
         }
 
         return lista;
@@ -229,13 +320,4 @@ public class Servidor extends Observable{
     public void setUsername(String utilizador) {
         this.username = utilizador;
     }
-
-    public String getMensagem(){return mensagem;}
-
-    public String getOrigem(){return origem;}
-
-    public boolean getUpdateLista(){return updateLista;}
-
-    public boolean getUpdateChats(){return updateChats;}
-
 }

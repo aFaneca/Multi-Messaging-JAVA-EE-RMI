@@ -3,63 +3,27 @@ package Modelo;
 import java.io.Serializable;
 
 public class Mensagem implements Serializable {
-    static final long serialVersionUID = 1000L;
-    private String origem;
-    private int minhaPortaTCP;
-    private int minhaPortaUDP;
-    private String meuEnderecoIP;
-    private String destino;
-    private String mensagemString;
+    static final long serialVersionUID = 102020L;
+
+    private Utilizador fromUser;
+    /*private Utilizador toUser;*/
+    private String mensagem;
 
 
-    public Mensagem(String origem, int minhaPortaTCP, int minhaPortaUDP, String meuEnderecoIP, String destino, String mensagemString) {
-        this.origem = origem;
-        this.minhaPortaTCP = minhaPortaTCP;
-        this.minhaPortaUDP = minhaPortaUDP;
-        this.meuEnderecoIP = meuEnderecoIP;
-        this.destino = destino;
-        this.mensagemString = mensagemString;
+    public Mensagem(Utilizador fromUser, String mensagem) {
+        this.fromUser = fromUser;
+        this.mensagem = mensagem;
     }
+
 
     /* Getters & Setters */
-    public String getOrigem() {
-        return origem;
+
+    public Utilizador getFromUser() {
+        return fromUser;
     }
 
-    public void setUsername(String username) {
-        this.origem = origem;
+
+    public String getMensagem() {
+        return mensagem;
     }
-
-    public int getPortaTCP() {
-        return minhaPortaTCP;
-    }
-
-    public void setPortaTCP(int portaTCP) {
-        this.minhaPortaTCP = portaTCP;
-    }
-
-    public int getPortaUDP() {
-        return minhaPortaUDP;
-    }
-
-    public void setPortaUDP(int portaUDP) {
-        this.minhaPortaUDP = portaUDP;
-    }
-
-    public String getEnderecoIP() {
-        return meuEnderecoIP;
-    }
-
-    public void setEnderecoIP(String enderecoIP) {
-        this.meuEnderecoIP = enderecoIP;
-    }
-
-    public String getUsernameDestino(){return destino;}
-
-    public String getDestino(){
-        return destino;
-    }
-
-    public String getMensagemString(){return mensagemString;}
 }
-

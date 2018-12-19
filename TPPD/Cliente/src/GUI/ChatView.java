@@ -1,96 +1,138 @@
 package GUI;
 
 import Controlador.Controlador;
-
+import Modelo.ChatPrivado;
+import Modelo.Mensagem;
+import Modelo.Utilizador;
+import Controlador.Servidor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ChatView{
+public class ChatView extends JFrame implements Observer {
 
-    private JLabel panel_talk = new JLabel();
-    private JTextArea zonaChat = new JTextArea();
-    private String user;
-    private String userDestino;
-    private JButton btn_enviar = new JButton("Enviar");
+    private JLabel panel_talk;
+    private JTextArea zonaChat;
+    private JButton btn_enviar;
     private Controlador c;
+    private String guardaChat;
+    private String user, userDestino;
+    private ChatPrivado chatPrivado;
 
-    public ChatView(String user, String userDestino, Controlador c,String mensagem) {
+    //String user, String userDestino, Controlador c,String mensagem
+    public ChatView(String user, String userDestino, Controlador c, ChatPrivado chatPrivado) {
+        super(user + " - Estás a falar com " + userDestino);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.user = user;
         this.userDestino = userDestino;
         this.c = c;
+        this.chatPrivado = chatPrivado;
 
-        JFrame frame = new JFrame(user + " Estás a falar com " + userDestino);
-        frame.setLayout(null);
-        frame.setSize(950,670);
+        setLayout(null);
+        setSize(950,670);
+
+        btn_enviar = new JButton("Enviar");
+        zonaChat = new JTextArea();
+        panel_talk = new JLabel();
 
         panel_talk.setBounds(500, 50, 300, 500);
         panel_talk.setBackground(Color.WHITE);
         panel_talk.setVerticalAlignment(SwingConstants.BOTTOM);
-        panel_talk.setText("<html> " + "No chat com: " + user + " -" +  mensagem + "- " + getDate() +" </html>");
+        //panel_talk.setText(mensagem);
         panel_talk.setOpaque(true);
 
         zonaChat.setBounds(50, 350, 400, 200);
         btn_enviar.setBounds(50,560,75,25);
-
-        frame.add(zonaChat);
-        frame.add(panel_talk);
-        frame.add(btn_enviar);
-
+        atualizaMensagens();
+        add(zonaChat);
+        add(panel_talk);
+        add(btn_enviar);
+        //setAcaoNoFechoDaJanela(c);
         btn_enviar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s = null;
                 String [] arr = null;
                 String date = new SimpleDateFormat("yyyy/MM/dd - HH:mm:ss").format(Calendar.getInstance().getTime());
+                String s1 = null;
 
-                c.mensagemAEnviar(userDestino, zonaChat.getText());
-
-                if(panel_talk.getText() == ""){
-                    s = "<html> " + user + ": " + zonaChat.getText() + " - " + date +" </html>";
-                    panel_talk.setText(s);
-                }else{
-                    System.out.println(panel_talk.getText());
-                    arr = panel_talk.getText().split(" ", 2); // tira o <html>
-
-                    String s1 = arr[1].substring(0, arr[1].lastIndexOf(" "));
-                    s = "<html> "  + s1 + "<br/>" + user + ": "+ zonaChat.getText()+ " - " + date +" </html>";
-                    panel_talk.setText(s);
-                }
+                c.enviarMensagemChatPrivado(getChatPrivado(), zonaChat.getText());
                 zonaChat.setText("");
             }
         });
 
-        frame.setVisible(true);
+        setVisible(true);
     }
 
-    private String getDate() {
-        return new SimpleDateFormat("yyyy/MM/dd - HH:mm:ss").format(Calendar.getInstance().getTime());
+    public ChatPrivado getChatPrivado(){
+        return chatPrivado;
+    }
+    private void setAcaoNoFechoDaJanela(Controlador c){
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // Faz alguma coisa antes de fechar a janela
+                //c.janelaDeChatVaiFechar((ChatView) this, chatPrivado);
+                System.exit(0);
+            }
+        });
     }
 
+    private void atualizaMensagens() {
+        String str = "<html>";
+
+        for(Mensagem msg : chatPrivado.getMensagens()){
+            str += msg.getMensagem();
+            str += "<br/>";
+        }
+
+        str += "</html>";
+
+        panel_talk.setText(str);
+
+        revalidate();
+        repaint();
+
+    }
+
+
+    public void guardaZonaChat(String text) {
+        this.guardaChat = text;
+    }
+
+    public String getGuardaZonaChat(){
+        return guardaChat;
+    }
+
+    public String getMensagem(){
+        return zonaChat.getText();
+    }
+
+    public void setPanel(String t){
+        JLabel jlabel = new JLabel(t);
+        panel_talk.add(jlabel);
+    }
 
     public String getUserDestino(){
         return userDestino;
     }
 
 
-    public void setConversacionText(String mensagem){
-        String s = null;
-        String [] arr = null;
-        String date = new SimpleDateFormat("yyyy/MM/dd - HH:mm:ss").format(Calendar.getInstance().getTime());
+    public JButton getBtn_Enviar(){return btn_enviar;}
 
-        if(panel_talk.getText() == ""){
-            s = "<html> " + userDestino + ": " + mensagem + " - " + date +" </html>";
-            panel_talk.setText(s);
-        }else{
-            arr = panel_talk.getText().split(" ", 2);
-            String s1 = arr[1].substring(0, arr[1].lastIndexOf(" "));
 
-            s = "<html> "  + s1 + "<br/>" + userDestino + ": "+ mensagem + " - " + date +" </html>";
-            panel_talk.setText(s);
-        }
+
+
+
+    @Override
+    public void update(Observable o, Object arg) {
+        Servidor server = (Servidor) arg;
+        chatPrivado = server.getChatPrivado(user, userDestino);
+        atualizaMensagens();
     }
 }
