@@ -4,7 +4,6 @@ import Controlador.Controlador;
 import Controlador.Servidor;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,17 +13,22 @@ import java.util.Observer;
 public class ClienteView extends JFrame implements Observer {
     private static final String TITULO_DA_APP = "Aplicação de Chat";
     private static final int DIM_X = 950, DIM_Y = 670;
+    private String mensagem;
+    private Controlador c;
 
     JPanel panel_footer, panel_listaDeUsers, panel_header, panel_chat;
     JList list_utilizadores;
     JLabel label_titulo;
-    JButton btn_sair;
+    JButton btn_sair, btn_chat;
 
-    public ClienteView() {
+    ArrayList<ChatView> usersChat = new ArrayList<>();
+
+    public ClienteView(Controlador c) {
 
         super();
+        this.c = c;
 
-        this.setTitle("PD");
+        this.setTitle("PD" );
         this.setResizable(false);
 
         // window settings - main JFrame
@@ -41,6 +45,10 @@ public class ClienteView extends JFrame implements Observer {
         panel_listaDeUsers.setBackground(new Color(0,105,92));
         configuraListaDeUsersPanel(null);
 
+        btn_chat = new JButton("CHAT");
+        panel_listaDeUsers.add(btn_chat, BorderLayout.LINE_END);
+
+
         // window settings - panel_footer
         panel_footer = new JPanel();
         panel_footer.setBackground(new Color(255,255,255));
@@ -53,15 +61,15 @@ public class ClienteView extends JFrame implements Observer {
         // window settings - panel_chat
         panel_chat = new JPanel(new BorderLayout());
         panel_chat.setBackground(new Color(0,150,136));
+        panel_chat.add(btn_chat, BorderLayout.EAST);
         configuraChatPanel();
 
         this.add(panel_listaDeUsers, BorderLayout.EAST);
         this.add(panel_footer, BorderLayout.SOUTH);
         this.add(panel_header, BorderLayout.NORTH);
         this.add(panel_chat, BorderLayout.CENTER);
+
         //this.setVisible(true);
-
-
     }
 
     public void setAcaoNoFechoDaJanela(Controlador c){
@@ -101,6 +109,7 @@ public class ClienteView extends JFrame implements Observer {
             list_utilizadores = new JList();
         list_utilizadores.setVisibleRowCount(10);
         list_utilizadores.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
         panel_listaDeUsers.add(new JScrollPane(list_utilizadores));
 
         revalidate();
@@ -109,19 +118,41 @@ public class ClienteView extends JFrame implements Observer {
 
     private void configuraFooterPanel(){
         panel_footer.add(new JLabel("Desenvolvido por António Faneca & Ricardo Marques"));
-
     }
 
     @Override
     public void update(Observable o, Object arg) {
+
         Servidor s = (Servidor) arg;
-        configuraListaDeUsersPanel((ArrayList) s.getListaDeUsernames());
+        boolean flag = false;
 
+        if(s.getUpdateLista() == true){
+            configuraListaDeUsersPanel((ArrayList) s.getListaDeUsernames());
+        }
 
+        if(s.getUpdateChats() == true){
+            for(ChatView u: usersChat){
+                if(u.getUserDestino().equals(s.getOrigem())){
+                    u.setConversacionText(s.getMensagem());
+                   // u.revalidate();
+                    //u.repaint();
+                    flag = true;
+                }
+            }
+            if(flag == false){
+                adicionaUsersChat(s.getUsername(),s.getOrigem(), s.getMensagem());
+            }
+        }
     }
 
     public void addListener(ActionListener cont, JButton b){
         b.addActionListener(cont);
+    }
+
+    public void adicionaUsersChat(String user, String userDestino, String mensagem){
+        ChatView cv =  new ChatView(user, userDestino, c, mensagem);
+        usersChat.add(cv);
+
     }
 
     public void aprensentarAlerta(String tipo, String msg) {
@@ -136,12 +167,35 @@ public class ClienteView extends JFrame implements Observer {
         }
     }
 
-
-
-
     /* Getters & Setters */
 
-    public JButton getBtn_sair() {
+    public String nomeSelecionado(){
+        return (String) list_utilizadores.getSelectedValue();
+    }
+
+    public JButton getBtn_Sair() {
         return btn_sair;
+    }
+
+    public JButton getBtn_Chat(){return btn_chat;}
+
+
+    public boolean verificaChatExistente(String userDestino) {
+
+        for(ChatView uC: usersChat){
+            if(uC.getUserDestino() == userDestino) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getZonaChatText(String userDestino) {
+        for(ChatView cV: usersChat){
+            if(cV.getUserDestino() == userDestino){
+                return cV.getGuardaZonaChat();
+            }
+        }
+        return null;
     }
 }

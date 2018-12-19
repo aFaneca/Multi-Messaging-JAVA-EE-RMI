@@ -2,19 +2,13 @@ package Controlador;
 
 import DAO.Conector;
 import DAO.UtilizadorDao;
-import Modelo.Auth;
-import Modelo.Constantes;
-import Modelo.MSG;
-import Modelo.Utilizador;
+import Modelo.*;
 
 import java.io.*;
 import java.net.BindException;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class Server {
     protected static final int SERVER_PORT = 9997;
@@ -49,6 +43,8 @@ public class Server {
     private void enviarParaTodosOsClientes(MSG msg){
         /*System.out.println("klklkl: " + msg);*/
         for(Conexao cliente : clientesConectados){
+            //System.out.println(cliente.getSocket().getPort());
+
             try {
                 cliente.enviar().writeObject(msg);
                 cliente.enviar().flush();
@@ -74,7 +70,6 @@ public class Server {
             }
         }
 
-
         public void run(){
             System.out.println("Conectado a partir de " + c.getSocket().getInetAddress());
             try{
@@ -89,7 +84,6 @@ public class Server {
                         break;
                     }
 
-
                     System.out.println("Mensagem Enviada!");
                     //in.close();
                     //s.close();
@@ -102,7 +96,6 @@ public class Server {
             }finally{
                     c.fecharSocket();
             }
-
         }
 
         private void processaMsg(MSG msg) {
@@ -114,11 +107,39 @@ public class Server {
                 case GET_USER_LIST:
                     processaUserList();
                     break;
+                case GET_MENSAGEM:
+                    enviarMensagemParaUmCliente(msg);
                 default:
                     break;
             }
-
         }
+
+
+        private void enviarMensagemParaUmCliente(MSG msg) {
+            Mensagem mensagem = (Mensagem)  msg.getObj();
+            int portaTCPDestino = UtilizadorDao.getClienteTCP(mensagem.getDestino());
+            System.out.println("A ENVIAR PARA DE: " + mensagem.getOrigem() + "PARA: " + mensagem.getDestino() + " " + portaTCPDestino + " - " + mensagem.getMensagemString());
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.append(mensagem.getOrigem());
+            stringBuilder.append(" ");
+            stringBuilder.append(mensagem.getMensagemString());
+
+            String finalString = stringBuilder.toString();
+
+            for(Conexao cliente : clientesConectados){
+               if(cliente.getSocket().getPort() == portaTCPDestino){
+                  try {
+                       cliente.enviar().writeObject(new MSG(Constantes.TIPOS.GET_MENSAGEM_REPLY, finalString));
+                       cliente.enviar().flush();
+                   } catch (IOException e) {
+                      e.printStackTrace();
+                    }
+                }
+            }
+        }
+
 
         private void processaUserList() {
             List<Utilizador> lista= UtilizadorDao.recuperarTodosOsUtilizadores();

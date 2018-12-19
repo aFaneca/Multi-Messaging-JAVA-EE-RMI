@@ -8,42 +8,40 @@ package Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+
 
 import GUI.ClienteView;
 import GUI.LoginView;
 import Modelo.Auth;
 import Modelo.Constantes;
 import Modelo.MSG;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
-import javafx.beans.InvalidationListener;
-
-import javax.swing.*;
+import Modelo.Mensagem;
 
 /**
  *
  * @author Ricardo Marques
  */
-public class Controlador implements ActionListener{
+public class Controlador  implements ActionListener{
 
     LoginView loginView = new LoginView();
-    //ClienteView clienteView = new ClienteView();
-    ClienteView clienteView = new ClienteView();
-    boolean login = false;
+    ClienteView clienteView = new ClienteView(this);
+
+    Controlador c;
     private Main m;
     Servidor server;
 
     public Controlador(Main m){
         loginView.setVisible(true);
         loginView.addListener(this, loginView.getB_Login());
-        clienteView.addListener(this, clienteView.getBtn_sair());
-        //loginView.addListener(this, clienteView.getB_Enviar());
+        clienteView.addListener(this, clienteView.getBtn_Sair());
+        clienteView.addListener(this, clienteView.getBtn_Chat());
         this.m = m;
+        this.c = this;
     }
 
 
     private void tentaLogin(String username, String password, String serverName, int serverPort){
-        /*loginView.aprensentarAlerta("Info", "Username: " + username + "\nPassword: "
-                + password + "\n" + "Server: " + serverName + "\n Port: " + serverPort);*/
 
         // 1 - Tenta conexão com o server
         server = new Servidor(serverName, serverPort);
@@ -58,7 +56,7 @@ public class Controlador implements ActionListener{
 
         // 2 - Envia username + password para o server
         server.conectar();
-        server.enviarParaServidor(new MSG(Constantes.TIPOS.AUTH, new Auth(username, password, serverPort, serverPort, serverName)));
+        server.enviarParaServidor(new MSG(Constantes.TIPOS.AUTH, new Auth(username, password, this.server.getPortoPessoal(), serverPort, serverName)));
 
         // 3 - Espera por resposta
         try {
@@ -97,11 +95,10 @@ public class Controlador implements ActionListener{
         return true;
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         Object origem = e.getSource();
+
         //Menu iniciar
         if(origem == loginView.getB_Login()){
             if(validaLogin(loginView.getUser(), loginView.getPass(), loginView.getServerName(), loginView.getServerPort()))
@@ -110,12 +107,28 @@ public class Controlador implements ActionListener{
                 loginView.aprensentarAlerta("Erro", "Certifique-se de que preencheu os dados corretamente e tente novamente!");
             }
 
-        }else if(origem == clienteView.getBtn_sair()){
+        }else if(origem == clienteView.getBtn_Sair()){
             // Terminar Sessão
             terminarSessao();
+        }else if(origem == clienteView.getBtn_Chat()){
+            String userDestino = clienteView.nomeSelecionado().substring(0, clienteView.nomeSelecionado().lastIndexOf(" "));
+            String ultimaPalavra = clienteView.nomeSelecionado().substring(clienteView.nomeSelecionado().lastIndexOf(" ") + 1);
+
+            if(userDestino != null && ultimaPalavra.equals("[Ativo]") && !userDestino.equals(loginView.getUser())) {
+                //fazer warnings
+                if(clienteView.verificaChatExistente(userDestino) == false){
+                    clienteView.adicionaUsersChat(loginView.getUser(), userDestino, "");
+                }else{
+                    System.out.println("Não criei chat");
+                }
+            }
         }
     }
 
+    public void mensagemAEnviar(String userDestino, String mensagem) {
+        System.out.println("De: " + loginView.getUser() + " Para:" + userDestino +" ->" + mensagem);
+        server.enviarParaServidor(new MSG(Constantes.TIPOS.GET_MENSAGEM, new Mensagem(loginView.getUser(),  loginView.getServerPort(), loginView.getServerPort() ,loginView.getServerName(),userDestino, mensagem)));
+    }
 
     public void janelaVaiFechar(){
         terminarSessao();
@@ -127,4 +140,5 @@ public class Controlador implements ActionListener{
         clienteView.setVisible(false);
         loginView.setVisible(true);
     }
+
 }

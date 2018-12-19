@@ -23,7 +23,7 @@ public class UtilizadorDao {
     private static String nomeDaTabela = "utilizador";
 
     public static void guardar(Utilizador u){
-        String sql = "INSERT INTO " + nomeDaTabela + " (username, password, estado, portaTCP, portaUDP, enderecoIP) values (?,?,?,?,?,?)"; // (?,...,?) - para evitar sql injection
+        String sql = "INSERT INTO " + nomeDaTabela + " (username, password, estado, portaTCP, portaUDP, enderecoIP) values (?,?,?,?,?,?,?)"; // (?,...,?) - para evitar sql injection
         
         try {
             PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
@@ -66,8 +66,8 @@ public class UtilizadorDao {
 
         try {
             PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
 
+            ResultSet rs = ps.executeQuery();
             // Transforma o ResultSet num objeto de Utilizador
             return transformarEmObjArr(rs);
 
@@ -75,6 +75,24 @@ public class UtilizadorDao {
             Logger.getLogger(UtilizadorDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public static int getClienteTCP(String user){
+
+        String sql = "SELECT portaTCP FROM " + nomeDaTabela +  " WHERE username = ?";
+
+        try{
+        PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
+        ps.setString(1, user);
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.first()){
+               return rs.getInt("portaTCP");
+        }
+        } catch (SQLException ex) {
+
+        }
+        return -1;
     }
 
     public static boolean validaLogin(String username, String password){
@@ -93,11 +111,6 @@ public class UtilizadorDao {
 
     /* Transforma o Result Set obtido da query num objeto do tipo Utilizador*/
     private static Utilizador transformarEmObj(ResultSet rs) throws SQLException{
-        String username, password;
-        String estado;
-        int portaTCP;
-        int portaUDP;
-        String enderecoIP;
         
         if(rs.first()){
             return new Utilizador(rs.getString("username"), rs.getString("password"), rs.getString("estado"), rs.getInt("portaTCP"), rs.getInt("portaUDP"), rs.getString("enderecoIP"));
@@ -109,11 +122,6 @@ public class UtilizadorDao {
     /* Transforma o Result Set obtido da query num array de objetos do tipo Utilizador*/
     private static List<Utilizador> transformarEmObjArr(ResultSet rs) throws SQLException{
         List<Utilizador> utilizadores = new ArrayList<>();
-        String username, password;
-        String estado;
-        int portaTCP;
-        int portaUDP;
-        String enderecoIP;
 
         while(rs.next()){
             utilizadores.add(new Utilizador(rs.getString("username"), rs.getString("password"), rs.getString("estado"), rs.getInt("portaTCP"), rs.getInt("portaUDP"), rs.getString("enderecoIP")));
@@ -123,6 +131,7 @@ public class UtilizadorDao {
     }
 
     public static void autenticarUtilizador(Auth auth) {
+
         String sql = "UPDATE " + nomeDaTabela +
                 " SET estado = 'Ativo', portaTCP = ?, portaUDP = ?, enderecoIP = ? " +
                 "WHERE username = ? ";

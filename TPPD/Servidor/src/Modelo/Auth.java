@@ -64,4 +64,5 @@ public class Auth implements Serializable {
     public void setEnderecoIP(String enderecoIP) {
         this.enderecoIP = enderecoIP;
     }
+
 }

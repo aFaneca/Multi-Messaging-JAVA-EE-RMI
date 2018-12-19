@@ -4,9 +4,9 @@ package Modelo;
 import java.io.Serializable;
 
 /*
-* Modelo padrão para o envio da mensagem do tipo Auth
-*
-* */
+ * Modelo padrão para o envio da mensagem do tipo Auth
+ *
+ * */
 public class Auth implements Serializable {
     static final long serialVersionUID = 10L;
     private String username;
@@ -64,4 +64,6 @@ public class Auth implements Serializable {
     public void setEnderecoIP(String enderecoIP) {
         this.enderecoIP = enderecoIP;
     }
+
 }
+

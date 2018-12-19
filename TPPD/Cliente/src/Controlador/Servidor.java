@@ -17,18 +17,27 @@ public class Servidor extends Observable{
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
     protected List<Utilizador> listaDeUtilizadores;
+    protected String mensagem;
+    protected String origem;
     protected String username;
+    protected boolean updateLista = true;
+    protected boolean updateChats = true;
+
 
     public Servidor(String serverName, int serverPort) {
 
         this.serverName = serverName;
         this.serverPort = serverPort;
-        this.listaDeUtilizadores = new ArrayList<Utilizador>();
+        this.listaDeUtilizadores = new ArrayList<>();
     }
 
     private void notificaObservadores(){
         setChanged();
         notifyObservers(this);
+    }
+
+    public int getPortoPessoal(){
+        return s.getLocalPort();
     }
 
 
@@ -90,7 +99,6 @@ public class Servidor extends Observable{
         }
     }
 
-
     protected class EscutaServidor implements Runnable{
         private Socket s;
 
@@ -101,7 +109,6 @@ public class Servidor extends Observable{
         @Override
         public void run() {
             while(true){
-                System.out.println("1");
                 // Lê mensagens que recebe do servidor e interpreta-as
                 MSG msg = null;
                 try {
@@ -114,7 +121,6 @@ public class Servidor extends Observable{
                     e.printStackTrace();
                     break;
                 }
-
             }
         }
 
@@ -123,19 +129,40 @@ public class Servidor extends Observable{
                 case GET_USER_LIST_REPLY:
                     recebeListaDeUtilizadores(msg);
                     break;
-                default: break;
+                case GET_MENSAGEM_REPLY:
+                    recebeMensagem(msg);
+                    break;
+                default:
+                    break;
             }
         }
 
-        private void recebeListaDeUtilizadores(MSG msg) {
+        private void recebeMensagem(MSG msg) {
 
+            mensagem = (String)  msg.getObj();
+            System.out.println(mensagem);
+
+            String [] arr = mensagem.split(" ", 2);
+            origem = arr[0];
+            mensagem = arr[1];
+
+            updateChats= true;
+            updateLista = false;
+            notificaObservadores();
+            updateChats=false;
+        }
+
+        private void recebeListaDeUtilizadores(MSG msg) {
 
             listaDeUtilizadores = (List<Utilizador>) msg.getObj();
 
             for(Utilizador u : listaDeUtilizadores)
                 System.out.println(u.getUsername() + " - " + u.getEstado());
+
+            updateLista = true;
+            updateChats = false;
             notificaObservadores();
-            
+            updateLista = false;
         }
     }
 
@@ -189,7 +216,7 @@ public class Servidor extends Observable{
         List<String> lista = new ArrayList<>();
 
         for(Utilizador u : listaDeUtilizadores){
-            lista.add(u.getUsername() + " [ " + u.getEstado() + " ]");
+            lista.add(u.getUsername() + " [" + u.getEstado() + "]");
         }
 
         return lista;
@@ -202,4 +229,13 @@ public class Servidor extends Observable{
     public void setUsername(String utilizador) {
         this.username = utilizador;
     }
+
+    public String getMensagem(){return mensagem;}
+
+    public String getOrigem(){return origem;}
+
+    public boolean getUpdateLista(){return updateLista;}
+
+    public boolean getUpdateChats(){return updateChats;}
+
 }

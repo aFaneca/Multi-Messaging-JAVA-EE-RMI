@@ -88,6 +88,5 @@ public class Utilizador implements Serializable {
     public void setEnderecoIP(String enderecoIP) {
         this.enderecoIP = enderecoIP;
     }
-    
-    
+
 }

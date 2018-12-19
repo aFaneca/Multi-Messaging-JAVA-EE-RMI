@@ -12,6 +12,8 @@ public class Constantes implements Serializable {
         AUTH_REPLY,
         GET_USER_LIST,
         GET_USER_LIST_REPLY,
+        GET_MENSAGEM,
+        GET_MENSAGEM_REPLY,
         SAIR
     }
 

@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author me
  */
-public class Utilizador  implements Serializable {
+public class Utilizador implements Serializable {
     static final long serialVersionUID = 1000L;
     private String username;
     private String password;
@@ -19,8 +19,9 @@ public class Utilizador  implements Serializable {
     private int portaTCP;
     private int portaUDP;
     private String enderecoIP;
-    
-    
+    private int PortaPessoal;
+
+
     public Utilizador(String user, String pw){
         this.username = user;
         this.password = pw;
@@ -28,19 +29,21 @@ public class Utilizador  implements Serializable {
         this.portaTCP = 0;
         this.portaUDP = 0;
         this.enderecoIP = "0";
+        this.PortaPessoal = 0;
     }
 
-    public Utilizador(String username, String password, String estado, int portaTCP, int portaUDP, String enderecoIP) {
+    public Utilizador(String username, String password, String estado, int portaTCP, int portaUDP, String enderecoIP, int PortaPessoal) {
         this.username = username;
         this.password = password;
         this.estado = estado;
         this.portaTCP = portaTCP;
         this.portaUDP = portaUDP;
         this.enderecoIP = enderecoIP;
+        this.PortaPessoal = PortaPessoal;
     }
 
-    
-    
+
+
     public String getUsername() {
         return username;
     }
@@ -88,6 +91,6 @@ public class Utilizador  implements Serializable {
     public void setEnderecoIP(String enderecoIP) {
         this.enderecoIP = enderecoIP;
     }
-    
-    
+
+
 }
