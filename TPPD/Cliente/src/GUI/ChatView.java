@@ -34,7 +34,7 @@ public class ChatView extends JFrame implements Observer {
         this.chatPrivado = chatPrivado;
 
         setLayout(null);
-        setSize(950,670);
+        setSize(1024,670);
 
         btn_enviar = new JButton("Enviar");
         zonaChat = new JTextArea();

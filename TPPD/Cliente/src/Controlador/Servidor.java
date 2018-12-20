@@ -6,12 +6,9 @@ import Modelo.Constantes;
 import Modelo.MSG;
 import Modelo.Utilizador;
 
-import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
+import java.util.*;
 
 public class Servidor extends Observable{
     protected Socket s;
@@ -20,6 +17,7 @@ public class Servidor extends Observable{
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
     protected List<Utilizador> listaDeUtilizadores;
+    protected Map<String, String> mapaDeUtilizadores;
     protected List<ChatPrivado> listaDeChatsPrivados;
     protected List<ChatView> listaDeChatViews;
     protected String username;
@@ -30,6 +28,7 @@ public class Servidor extends Observable{
         this.serverName = serverName;
         this.serverPort = serverPort;
         this.listaDeUtilizadores = new ArrayList<Utilizador>();
+        this.mapaDeUtilizadores = new HashMap<>();
         this.listaDeChatsPrivados = new ArrayList<>();
         this.listaDeChatViews = new ArrayList<>();
     }
@@ -79,7 +78,7 @@ public class Servidor extends Observable{
     *  Só está planeado utilizar este método antes de a autenticação se realizar. Após isso, é esperado
     *  que novos pedidos sejam lidos pela thread dedicada
     * */
-    public MSG receberDoServidor(Constantes.TIPOS tipo) throws IOException, ClassNotFoundException {
+    public MSG receberDoServidor(Constantes.MENSAGEM_TIPO tipo) throws IOException, ClassNotFoundException {
         MSG msg;
 
         while(true){
@@ -163,8 +162,7 @@ public class Servidor extends Observable{
         private void recebeNovaMensagemChatPrivado(MSG msg) {
             ChatPrivado cv = (ChatPrivado) msg.getObj();
             boolean isForMe = false;
-            //System.out.println("Recebi chat privado");
-            //System.out.println("MEU USERNAME: " + getUsername());
+
             for(Utilizador u : cv.getUsers()) {
                 if (u.getUsername().equalsIgnoreCase(getUsername()))
                     isForMe = true;
@@ -183,28 +181,6 @@ public class Servidor extends Observable{
 
 
             notificaObservadores();
-            //System.out.println("IS FOR ME");
-            /*if(jaExiste){
-                // Janela já está aberta, atualizar só as mensagens
-                listaDeChatsPrivados.set(listaDeChatsPrivados.indexOf(cv), cv);
-                notificaObservadores();
-            }else{
-                // Abrir janela de chat
-                String userDestino = "N/D";
-
-                for(Utilizador u : cv.getUsers()) {
-                    if (!u.getUsername().equalsIgnoreCase(getUsername()))
-                        userDestino = u.getUsername();
-                }
-
-                ChatView cv2 = new ChatView(getUsername(), userDestino, c,  cv);
-                addObserver(cv2);
-                listaDeChatViews.add(cv2);
-
-                // Adicionar à lista de chats
-                listaDeChatsPrivados.add(cv);
-            }*/
-
         }
 
         private void recebeChatPrivado(MSG msg) {
@@ -250,8 +226,11 @@ public class Servidor extends Observable{
 
             listaDeUtilizadores = (List<Utilizador>) msg.getObj();
 
-            for(Utilizador u : listaDeUtilizadores)
-                System.out.println(u.getUsername() + " - " + u.getEstado());
+            /* Transformar a ArrayList num HashMap <Username, Status> */
+            for(Utilizador u : listaDeUtilizadores){
+                mapaDeUtilizadores.put(u.getUsername(), u.getEstado());
+            }
+
             notificaObservadores();
             
         }
@@ -319,5 +298,9 @@ public class Servidor extends Observable{
 
     public void setUsername(String utilizador) {
         this.username = utilizador;
+    }
+
+    public Map<String, String> getMapaDeUtilizadores() {
+        return mapaDeUtilizadores;
     }
 }

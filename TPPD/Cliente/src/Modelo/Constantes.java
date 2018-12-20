@@ -6,8 +6,8 @@ public class Constantes implements Serializable {
     static final long serialVersionUID = 100L;
     private Constantes(){}
 
-    // TIPOS DE MENSAGEM
-    public enum TIPOS {
+    /* MENSAGEM_TIPO DE MENSAGEM */
+    public enum MENSAGEM_TIPO {
         AUTH,
         AUTH_REPLY,
         GET_USER_LIST,
@@ -19,14 +19,24 @@ public class Constantes implements Serializable {
         SAIR
     }
 
+    /* HashMap Keys for users */
+    public enum USER_MAP {
+        USERNAME,
+        STATUS
+    }
+
+    public enum USER_STATUS {
+        ATIVO,
+        INATIVO
+    }
+
     /* SEND_PRIVATE_CHAT_MESSAGE */
     public static final String MENSAGEM_TEXTO = "MENSAGEM_TEXTO";
     public static final String MENSAGEM_REMETENTE = "MENSAGEM_REMETENTE";
     public static final String MENSAGEM_CHAT_PRIVADO = "MENSAGEM_CHAT_PRIVADO";
 
-    /*public class TIPOS{
-        public static final String AUTH = "AUTH";
-        public static final String SAIR = "SAIR";
-    }*/
+
+    /* */
+
 }
 

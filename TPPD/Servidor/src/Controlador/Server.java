@@ -7,7 +7,6 @@ import Modelo.*;
 import java.io.*;
 import java.net.BindException;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -76,7 +75,7 @@ public class Server {
                 while(true){
                     //in = new ObjectInputStream(s.getInputStream());
                     msg = (MSG) c.receber().readObject(); // Fica à espera de receber um objeto do cliente
-                    if(msg.getTipo() != Constantes.TIPOS.SAIR)
+                    if(msg.getTipo() != Constantes.MENSAGEM_TIPO.SAIR)
                         processaMsg(msg);
                     else{
                         clientesConectados.remove(c);
@@ -149,7 +148,7 @@ public class Server {
             cp.addMessage(new Mensagem(utilizadorRemetente, mensagem, data));
 
             ChatPrivado cp2 = cp;
-            enviarParaTodosOsClientes(new MSG(Constantes.TIPOS.NEW_PRIVATE_CHAT_MESSAGE, cp));
+            enviarParaTodosOsClientes(new MSG(Constantes.MENSAGEM_TIPO.NEW_PRIVATE_CHAT_MESSAGE, cp));
 
         }
 
@@ -162,12 +161,12 @@ public class Server {
             }
 
             ChatPrivado cp = new ChatPrivado(users);
-            enviarParaTodosOsClientes(new MSG(Constantes.TIPOS.BEGIN_CHAT_REPLY, cp));
+            enviarParaTodosOsClientes(new MSG(Constantes.MENSAGEM_TIPO.BEGIN_CHAT_REPLY, cp));
         }
 
         private void processaUserList() {
             List<Utilizador> lista= UtilizadorDao.recuperarTodosOsUtilizadores();
-            enviarParaTodosOsClientes(new MSG(Constantes.TIPOS.GET_USER_LIST_REPLY, lista));
+            enviarParaTodosOsClientes(new MSG(Constantes.MENSAGEM_TIPO.GET_USER_LIST_REPLY, lista));
         }
 
         private void processaAuth(MSG msg) {
@@ -183,7 +182,7 @@ public class Server {
                 // Se o lógin é inválido
                 valido = false;
             }
-            enviarParaCliente(new MSG(Constantes.TIPOS.AUTH_REPLY, new Boolean(valido))); // Envia a resposta de volta para o cliente
+            enviarParaCliente(new MSG(Constantes.MENSAGEM_TIPO.AUTH_REPLY, new Boolean(valido))); // Envia a resposta de volta para o cliente
         }
 
         private void autenticarUtilizador(Auth auth) {

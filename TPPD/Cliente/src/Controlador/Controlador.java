@@ -17,10 +17,6 @@ import GUI.ChatView;
 import GUI.ClienteView;
 import GUI.LoginView;
 import Modelo.*;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
-import javafx.beans.InvalidationListener;
-
-import javax.swing.*;
 
 /**
  *
@@ -62,11 +58,11 @@ public class Controlador implements ActionListener{
 
         // 2 - Envia username + password para o server
         server.conectar();
-        server.enviarParaServidor(new MSG(Constantes.TIPOS.AUTH, new Auth(username, password, serverPort, serverPort, serverName)));
+        server.enviarParaServidor(new MSG(Constantes.MENSAGEM_TIPO.AUTH, new Auth(username, password, serverPort, serverPort, serverName)));
 
         // 3 - Espera por resposta
         try {
-            MSG msg = server.receberDoServidor(Constantes.TIPOS.AUTH_REPLY);
+            MSG msg = server.receberDoServidor(Constantes.MENSAGEM_TIPO.AUTH_REPLY);
 
             // 4 - Toma decisão de acordo com a resposta recebida
             if((Boolean) msg.getObj()){
@@ -93,7 +89,7 @@ public class Controlador implements ActionListener{
     }
     /* Pede ao Servidor info inicial */
     private void pedeInfoInicial() {
-        server.enviarParaServidor(new MSG(Constantes.TIPOS.GET_USER_LIST, null)); // Pede ao server a lista de utilizadores
+        server.enviarParaServidor(new MSG(Constantes.MENSAGEM_TIPO.GET_USER_LIST, null)); // Pede ao server a lista de utilizadores
     }
 
     private boolean validaLogin(String username, String password, String serverName, int serverPort){
@@ -155,7 +151,7 @@ public class Controlador implements ActionListener{
         users.add(server.getUsername());
         users.add(userDestino);
 
-        server.enviarParaServidor(new MSG(Constantes.TIPOS.BEGIN_CHAT, users));
+        server.enviarParaServidor(new MSG(Constantes.MENSAGEM_TIPO.BEGIN_CHAT, users));
     }
 
 
@@ -170,7 +166,7 @@ public class Controlador implements ActionListener{
     }
 
     private void terminarSessao() {
-        server.enviarParaServidor(new MSG(Constantes.TIPOS.SAIR, server.getUsername()));
+        server.enviarParaServidor(new MSG(Constantes.MENSAGEM_TIPO.SAIR, server.getUsername()));
         server.fecharConexao();
         clienteView.setVisible(false);
         loginView.setVisible(true);
@@ -197,6 +193,6 @@ public class Controlador implements ActionListener{
         obj.put(Constantes.MENSAGEM_CHAT_PRIVADO, chatPrivado);
 
 
-        server.enviarParaServidor(new MSG(Constantes.TIPOS.SEND_PRIVATE_CHAT_MESSAGE, obj));
+        server.enviarParaServidor(new MSG(Constantes.MENSAGEM_TIPO.SEND_PRIVATE_CHAT_MESSAGE, obj));
     }
 }

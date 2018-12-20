@@ -8,12 +8,13 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
 public class ClienteView extends JFrame implements Observer {
     private static final String TITULO_DA_APP = "Aplicação de Chat";
-    private static final int DIM_X = 950, DIM_Y = 670;
+    private static final int DIM_X = 1024, DIM_Y = 670;
     private String mensagem;
     private Controlador c;
 
@@ -102,8 +103,32 @@ public class ClienteView extends JFrame implements Observer {
         panel_header.add(btn_sair, BorderLayout.LINE_END);
     }
 
-    private void configuraListaDeUsersPanel(ArrayList<String> lista) {
+    private void configuraListaDeUsersPanel(HashMap<String, String> lista) {
         panel_listaDeUsers.removeAll();
+        if(lista != null){
+            list_utilizadores = new JList<String>(new DefaultListModel<String>());
+
+            /* Percorre o hashmap e preenche cada posição da JList */
+            lista.forEach((username, status) -> {
+                if(!username.equalsIgnoreCase(c.getServer().getUsername()))
+                    ((DefaultListModel)list_utilizadores.getModel()).addElement(username + " [ " + status + " ] ");
+            });
+
+        }
+
+        else
+            list_utilizadores = new JList<String>(new DefaultListModel<String>());
+
+        list_utilizadores.setVisibleRowCount(10);
+        list_utilizadores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        panel_listaDeUsers.add(new JScrollPane(list_utilizadores));
+
+        revalidate();
+        repaint();
+
+
+        /*panel_listaDeUsers.removeAll();
         if(lista != null)
             list_utilizadores = new JList(lista.toArray());
         else
@@ -114,40 +139,15 @@ public class ClienteView extends JFrame implements Observer {
         panel_listaDeUsers.add(new JScrollPane(list_utilizadores));
 
         revalidate();
-        repaint();
+        repaint();*/
     }
+
 
     private void configuraFooterPanel(){
         panel_footer.add(new JLabel("Desenvolvido por António Faneca & Ricardo Marques"));
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
 
-        Servidor s = (Servidor) arg;
-
-        configuraListaDeUsersPanel((ArrayList) s.getListaDeUsernames());
-
-        /*boolean flag = false;
-
-        if(s.getUpdateLista() == true){
-            configuraListaDeUsersPanel((ArrayList) s.getListaDeUsernames());
-        }
-
-        if(s.getUpdateChats() == true){
-            for(ChatView u: usersChat){
-                if(u.getUserDestino().equals(s.getOrigem())){
-                    u.setConversationText(s.getMensagem());
-                    u.revalidate();
-                    u.repaint();
-                    flag = true;
-                }
-            }
-            if(flag == false){
-                adicionaUsersChat(s.getUsername(),s.getOrigem(), s.getMensagem());
-            }
-        }*/
-    }
 
     public void addListener(ActionListener cont, JButton b){
         b.addActionListener(cont);
@@ -204,5 +204,33 @@ public class ClienteView extends JFrame implements Observer {
             }
         }
         return null;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+        Servidor s = (Servidor) arg;
+
+        configuraListaDeUsersPanel((HashMap<String, String>) s.getMapaDeUtilizadores());
+
+        /*boolean flag = false;
+
+        if(s.getUpdateLista() == true){
+            configuraListaDeUsersPanel((ArrayList) s.getListaDeUsernames());
+        }
+
+        if(s.getUpdateChats() == true){
+            for(ChatView u: usersChat){
+                if(u.getUserDestino().equals(s.getOrigem())){
+                    u.setConversationText(s.getMensagem());
+                    u.revalidate();
+                    u.repaint();
+                    flag = true;
+                }
+            }
+            if(flag == false){
+                adicionaUsersChat(s.getUsername(),s.getOrigem(), s.getMensagem());
+            }
+        }*/
     }
 }
