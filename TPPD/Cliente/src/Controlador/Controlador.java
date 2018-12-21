@@ -119,10 +119,10 @@ public class Controlador implements ActionListener{
             String userStatus = null;
 
             if(clienteView.nomeSelecionado() == null) return; // this means no name was selected
-            userDestino = clienteView.nomeSelecionado().substring(0, clienteView.nomeSelecionado().lastIndexOf(" ["));
-            userStatus = clienteView.nomeSelecionado().substring(clienteView.nomeSelecionado().lastIndexOf("[ "));
+            userDestino = clienteView.nomeSelecionado();
 
-            if(userDestino != null && userStatus.equals("[ Ativo ]")){
+
+            if(userDestino != null){
                 iniciarChat(userDestino);
             }
 

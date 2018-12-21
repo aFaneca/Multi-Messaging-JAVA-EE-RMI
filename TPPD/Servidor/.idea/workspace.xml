@@ -2,6 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="342423dc-515b-4f45-97f8-a81292a8d6bd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Cliente/Recursos/icon_offline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Cliente/Recursos/icon_online.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Controlador/Controlador.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Controlador/Controlador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/META-INF/Cliente.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/src/Controlador/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/src/Controlador/Controlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/src/GUI/ClienteView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/src/GUI/ClienteView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -363,7 +380,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545339760191" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545351482149" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Cliente" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -445,12 +462,12 @@
       <workItem from="1545231119439" duration="7039000" />
       <workItem from="1545240588723" duration="7611000" />
       <workItem from="1545248694218" duration="3778000" />
-      <workItem from="1545336460921" duration="2494000" />
+      <workItem from="1545336460921" duration="4905000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64658000" />
+    <option name="totallyTimeSpent" value="67069000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">

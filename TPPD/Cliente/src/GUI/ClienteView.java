@@ -2,15 +2,15 @@ package GUI;
 
 import Controlador.Controlador;
 import Controlador.Servidor;
+import Modelo.Constantes;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
 
 public class ClienteView extends JFrame implements Observer {
     private static final String TITULO_DA_APP = "Aplicação de Chat";
@@ -103,7 +103,9 @@ public class ClienteView extends JFrame implements Observer {
         panel_header.add(btn_sair, BorderLayout.LINE_END);
     }
 
+
     private void configuraListaDeUsersPanel(HashMap<String, String> lista) {
+
         panel_listaDeUsers.removeAll();
         if(lista != null){
             list_utilizadores = new JList<String>(new DefaultListModel<String>());
@@ -111,8 +113,11 @@ public class ClienteView extends JFrame implements Observer {
             /* Percorre o hashmap e preenche cada posição da JList */
             lista.forEach((username, status) -> {
                 if(!username.equalsIgnoreCase(c.getServer().getUsername()))
-                    ((DefaultListModel)list_utilizadores.getModel()).addElement(username + " [ " + status + " ] ");
+                    ((DefaultListModel)list_utilizadores.getModel()).addElement(username);
             });
+            //list_utilizadores.setListData(lista.keySet().toArray());
+            list_utilizadores.setCellRenderer(new ListaDeUtilizadoresRenderer(lista));
+
 
         }
 
@@ -126,20 +131,6 @@ public class ClienteView extends JFrame implements Observer {
 
         revalidate();
         repaint();
-
-
-        /*panel_listaDeUsers.removeAll();
-        if(lista != null)
-            list_utilizadores = new JList(lista.toArray());
-        else
-            list_utilizadores = new JList();
-        list_utilizadores.setVisibleRowCount(10);
-        list_utilizadores.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-        panel_listaDeUsers.add(new JScrollPane(list_utilizadores));
-
-        revalidate();
-        repaint();*/
     }
 
 
@@ -174,8 +165,10 @@ public class ClienteView extends JFrame implements Observer {
     /* Getters & Setters */
 
     public String nomeSelecionado(){
-        if(list_utilizadores.getSelectedValue() != null)
+        if(list_utilizadores.getSelectedValue() != null){
             return (String) list_utilizadores.getSelectedValue();
+        }
+
 
         return null;
     }
