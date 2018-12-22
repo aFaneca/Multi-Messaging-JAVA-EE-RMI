@@ -3,21 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="da97104b-2d22-4c41-b45e-ed307293f0b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Cliente/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$MENSAGEM_TIPO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$MENSAGEM_TIPO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$USER_MAP.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$USER_MAP.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$USER_STATUS.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$USER_STATUS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/src/Controlador/Servidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/src/Controlador/Servidor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/src/Modelo/Constantes.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/src/Modelo/Constantes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor/out/production/TPPD/Controlador/Server$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/out/production/TPPD/Controlador/Server$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor/out/production/TPPD/Controlador/KeepAliveThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/out/production/TPPD/Controlador/KeepAliveThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor/out/production/TPPD/Controlador/Server$AtendeCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/out/production/TPPD/Controlador/Server$AtendeCliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor/out/production/TPPD/Controlador/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/out/production/TPPD/Controlador/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor/out/production/TPPD/DAO/UtilizadorDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/out/production/TPPD/DAO/UtilizadorDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor/out/production/TPPD/Modelo/Constantes.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/out/production/TPPD/Modelo/Constantes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor/src/Controlador/KeepAliveThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/src/Controlador/KeepAliveThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor/src/Controlador/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/src/Controlador/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor/src/DAO/UtilizadorDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/src/DAO/UtilizadorDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor/src/Modelo/Constantes.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor/src/Modelo/Constantes.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -187,7 +178,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545520379931" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545521019633" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -237,6 +228,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Image Layers" />

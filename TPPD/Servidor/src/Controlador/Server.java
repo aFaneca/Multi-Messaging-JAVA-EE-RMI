@@ -225,7 +225,7 @@ public class Server {
             UtilizadorDao.desautenticarUtilizador(username);
             processaUserList();
             servicoObsServer.notificaListeners();
-            System.out.println("User username desautenticado.");
+            System.out.println("User " + username + " desautenticado.");
         }
 
         public void enviarParaCliente(MSG msg){

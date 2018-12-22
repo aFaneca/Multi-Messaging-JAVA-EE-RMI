@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="342423dc-515b-4f45-97f8-a81292a8d6bd" name="Default Changelist" comment="" />
+    <list default="true" id="342423dc-515b-4f45-97f8-a81292a8d6bd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TPPD/Controlador/KeepAliveThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TPPD/Controlador/KeepAliveThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TPPD/Controlador/Server$AtendeCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TPPD/Controlador/Server$AtendeCliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/KeepAliveThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controlador/KeepAliveThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controlador/Server.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,12 +99,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="12600" />
+          <entry key="java" value="12681" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="12599" />
+          <entry key="JAVA" value="12680" />
           <entry key="SQL" value="1" />
         </counts>
       </usages-collector>
@@ -147,11 +153,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controlador/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="119" column="24" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
+            <state relative-caret-position="228">
+              <caret line="227" column="54" selection-start-line="227" selection-start-column="54" selection-end-line="227" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#processaNovaMensagemChat#0;class#AtendeCliente#0;class#Server#0" />
@@ -164,11 +170,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controlador/KeepAliveThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="72" column="153" selection-start-line="72" selection-start-column="149" selection-end-line="72" selection-end-column="153" />
+            <state relative-caret-position="384">
+              <caret line="81" column="198" selection-start-line="81" selection-start-column="198" selection-end-line="81" selection-end-column="198" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -253,6 +259,7 @@
       <find>desauten</find>
       <find>desa</find>
       <find>desautenticarUtilizador</find>
+      <find>username desa</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -280,8 +287,8 @@
         <option value="$PROJECT_DIR$/src/RMI/ServicoObsInterfaceServer.java" />
         <option value="$PROJECT_DIR$/src/DAO/UtilizadorDao.java" />
         <option value="$PROJECT_DIR$/src/Modelo/Constantes.java" />
-        <option value="$PROJECT_DIR$/src/Controlador/KeepAliveThread.java" />
         <option value="$PROJECT_DIR$/src/Controlador/Server.java" />
+        <option value="$PROJECT_DIR$/src/Controlador/KeepAliveThread.java" />
       </list>
     </option>
   </component>
@@ -402,7 +409,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545520379839" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545521019210" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Cliente" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -490,12 +497,12 @@
       <workItem from="1545240588723" duration="7611000" />
       <workItem from="1545248694218" duration="3778000" />
       <workItem from="1545336460921" duration="4905000" />
-      <workItem from="1545476314199" duration="25447000" />
+      <workItem from="1545476314199" duration="25965000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92516000" />
+    <option name="totallyTimeSpent" value="93034000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -507,10 +514,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1060" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8358663" visible="true" weight="0.18259935" />
-      <window_info id="Structure" order="1" sideWeight="0.16413374" side_tool="true" visible="true" weight="0.18259935" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8358663" visible="true" weight="0.0424275" />
+      <window_info id="Structure" order="1" sideWeight="0.16413374" side_tool="true" visible="true" weight="0.0424275" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
@@ -932,20 +940,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controlador/KeepAliveThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="72" column="153" selection-start-line="72" selection-start-column="149" selection-end-line="72" selection-end-column="153" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controlador/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="119" column="24" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
+        <state relative-caret-position="228">
+          <caret line="227" column="54" selection-start-line="227" selection-start-column="54" selection-end-line="227" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#processaNovaMensagemChat#0;class#AtendeCliente#0;class#Server#0" />
@@ -953,6 +951,16 @@
             <element signature="method#processaAuth#0;class#AtendeCliente#0;class#Server#0" />
             <element signature="e#8213#8214#0" expanded="true" />
             <element signature="e#8254#8255#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controlador/KeepAliveThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="81" column="198" selection-start-line="81" selection-start-column="198" selection-end-line="81" selection-end-column="198" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

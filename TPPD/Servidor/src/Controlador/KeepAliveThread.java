@@ -26,7 +26,7 @@ public class KeepAliveThread implements Runnable{
             conexao.enviar().flush();
             //out.close();
         }catch( SocketException e) {
-            System.out.println("Erro a escrever no socket.");
+            //System.out.println("Erro a escrever no socket.");
             return -1;
         }catch (IOException e) {
             e.printStackTrace();
@@ -79,7 +79,7 @@ public class KeepAliveThread implements Runnable{
 
                     if(enviarParaCliente(new MSG(Constantes.MENSAGEM_TIPO.KEEP_ALIVE, null)) == -1){
                         UtilizadorDao.changeNrFalhas(conexao.getUtilizador().getUsername(), +1);
-                        //utils.podeLer = true;
+                        System.out.println("Impossível entrar em contato com " + conexao.getUtilizador().getUsername() + "(" + conexao.getSocket().getRemoteSocketAddress() + ". A tentar novamente...");
                         continue;
                     }
 
