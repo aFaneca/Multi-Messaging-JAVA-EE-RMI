@@ -16,6 +16,8 @@ public class Constantes implements Serializable {
         BEGIN_CHAT_REPLY,
         SEND_PRIVATE_CHAT_MESSAGE,
         NEW_PRIVATE_CHAT_MESSAGE,
+        KEEP_ALIVE,
+        KEEP_ALIVE_REPLY,
         SAIR
     }
 
@@ -38,6 +40,12 @@ public class Constantes implements Serializable {
 
     /* RMI */
     public static final String RMI_NOME_SERVICO = "ObservacaoSistema";
+
+
+    /* KEEP ALIVE */
+    public static final int KEEP_ALIVE_TIME_INTERVAL = 5000; // ms
+    public static final int KEEP_ALIVE_LIMITE_FALHAS = 3;
+    public static final int KEEP_ALIVE_TIMEOUT_LIMIT = 5000; // ms
 
 }
 

@@ -55,21 +55,38 @@ public class Server {
     }
 
     private void enviarParaTodosOsClientes(MSG msg){
-        for(Conexao cliente : clientesConectados){
+
+        for(int i = 0; i < clientesConectados.size(); i++){
             try {
-                cliente.enviar().writeObject(msg);
-                cliente.enviar().flush();
-            } catch (IOException e) {
-                e.printStackTrace();
+                clientesConectados.get(i).enviar().writeObject(msg);
+                clientesConectados.get(i).enviar().flush();
+            }catch (Exception e) {
+                //UtilizadorDao.desautenticarUtilizador(clientesConectados.get(i).getUtilizador().getUsername());
+                clientesConectados.remove(clientesConectados.get(i)); i--;
+                //e.printStackTrace();
             }
         }
-    }
 
-    private class AtendeCliente implements Runnable {
+
+       /*     for(Conexao cliente : clientesConectados){
+                try {
+                    cliente.enviar().writeObject(msg);
+                    cliente.enviar().flush();
+                }catch (Exception e) {
+                    clientesConectados.remove(cliente);
+                    //UtilizadorDao.desautenticarUtilizador(cliente.getUtilizador().getUsername());
+                    //e.printStackTrace();
+                }
+            }*/
+        }
+
+
+    public class AtendeCliente implements Runnable {
         Conexao c; // Socket connection to the client
         ObjectInputStream in;
         ObjectOutputStream out;
         MSG msg;
+        boolean podeLer = true;
 
         public AtendeCliente(Conexao c){
             this.c = c;
@@ -79,15 +96,23 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+
         }
 
 
         public void run(){
             System.out.println("Conectado a partir de " + c.getSocket().getInetAddress());
+            KeepAliveThread keepAlive = new KeepAliveThread(c, this);
+            new Thread(keepAlive).start();
             try{
                 while(true){
-                    //in = new ObjectInputStream(s.getInputStream());
-                    msg = (MSG) c.receber().readObject(); // Fica à espera de receber um objeto do cliente
+                    try{
+                        msg = (MSG) c.receber().readObject(); // Fica à espera de receber um objeto do cliente
+                    }catch(Exception e){
+                        continue;
+                    }
+
                     if(msg.getTipo() != Constantes.MENSAGEM_TIPO.SAIR)
                         processaMsg(msg);
                     else{
@@ -95,17 +120,8 @@ public class Server {
                         desautenticarUtilizador((String) msg.getObj());
                         break;
                     }
-
-
-                    System.out.println("Mensagem Enviada!");
-                    //in.close();
-                    //s.close();
                 }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             }finally{
                     c.fecharSocket();
             }
@@ -205,10 +221,11 @@ public class Server {
             servicoObsServer.notificaListeners();
         }
 
-        private void desautenticarUtilizador(String username) {
+        public void desautenticarUtilizador(String username) {
             UtilizadorDao.desautenticarUtilizador(username);
             processaUserList();
             servicoObsServer.notificaListeners();
+            System.out.println("User username desautenticado.");
         }
 
         public void enviarParaCliente(MSG msg){

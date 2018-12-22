@@ -77,6 +77,59 @@ public class UtilizadorDao {
         return null;
     }
 
+
+    public static int getNrFalhas(String username){
+        String sql = "SELECT cnt_falhas FROM " + nomeDaTabela +
+                " WHERE username = ? ";
+        try{
+            PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+            rs.first();
+            int i = rs.getInt("cnt_falhas");
+            return i;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static void changeNrFalhas(String username, int change){
+        String sql = "UPDATE " + nomeDaTabela +
+                " SET cnt_falhas = cnt_falhas + (?) " +
+                "WHERE username = ? ";
+
+        try {
+            PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
+            ps.setInt(1, change);
+            ps.setString(2, username);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static void resetNrFalhas(String username){
+        String sql = "UPDATE " + nomeDaTabela +
+                " SET cnt_falhas = 0 " +
+                "WHERE username = ? ";
+
+        try {
+            PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
+            ps.setString(1, username);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
     public static boolean validaLogin(String username, String password){
 
         // Verifica se existe algum utilizador na BD com esse username
@@ -144,7 +197,8 @@ public class UtilizadorDao {
 
     public static void desautenticarUtilizador(String username) {
         String sql = "UPDATE " + nomeDaTabela +
-                " SET estado = 'Inativo'" +
+                " SET estado = 'Inativo'," +
+                " cnt_falhas = 0 " +
                 "WHERE username = ?";
 
         try {

@@ -155,7 +155,25 @@ public class Servidor extends Observable{
                 case NEW_PRIVATE_CHAT_MESSAGE:
                     recebeNovaMensagemChatPrivado(msg);
                     break;
+                case KEEP_ALIVE:
+                    System.out.println("Recebi pedido KEEPALIVE.");
+                    recebePedidoKeepAlive();
+                    break;
                 default: break;
+            }
+        }
+
+        private void recebePedidoKeepAlive() {
+
+            try {
+                //out = new ObjectOutputStream(s.getOutputStream()); // stream de saída
+                out.writeObject(Constantes.MENSAGEM_TIPO.KEEP_ALIVE_REPLY.toString());
+                out.reset();
+                out.flush();
+
+                //out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
