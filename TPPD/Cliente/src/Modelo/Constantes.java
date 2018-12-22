@@ -1,8 +1,6 @@
 package Modelo;
 
-import javax.swing.*;
 import java.io.Serializable;
-import java.net.URL;
 
 public class Constantes implements Serializable {
     static final long serialVersionUID = 100L;
@@ -38,24 +36,8 @@ public class Constantes implements Serializable {
     public static final String MENSAGEM_CHAT_PRIVADO = "MENSAGEM_CHAT_PRIVADO";
 
 
-    /* ICONS */
-    public enum RECURSOS {
-        ICON_ONLINE("Recursos/icon_online.png"),
-        ICON_OFFLINE("Recursos/icon_offline.png");
+    /* RMI */
+    private static final String RMI_NOME_SERVICO = "ObservacaoSistema";
 
-        private final String conteudo;
-
-        RECURSOS(String s) {
-            this.conteudo = s;
-        }
-
-        @Override
-        public String toString(){
-            return conteudo;
-        }
-    }
-
-    public  ImageIcon ICON_ONLINE = new ImageIcon(Constantes.class.getResource(RECURSOS.ICON_ONLINE.toString()));
-    public  ImageIcon ICON_OFFLINE = new ImageIcon(Constantes.class.getResource(RECURSOS.ICON_OFFLINE.toString()));
 }
 

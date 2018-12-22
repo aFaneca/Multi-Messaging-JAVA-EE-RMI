@@ -3,10 +3,12 @@ package Controlador;
 import DAO.Conector;
 import DAO.UtilizadorDao;
 import Modelo.*;
+import RMI.ServicoObsInterfaceServer;
 
 import java.io.*;
 import java.net.BindException;
 import java.net.ServerSocket;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -16,10 +18,19 @@ public class Server {
     protected static final int SERVER_TIMEOUT = 0; //10000;
     protected boolean clienteConectado = false;
     protected List<Conexao> clientesConectados;
+    private List<Utilizador> utilizadoresAtivos;
+    private List<String> usernamesAtivos;
+    protected ServicoObsInterfaceServer servicoObsServer;
 
     public Server(String ipDB){
         Conector.setIpDB(ipDB);
         clientesConectados = new ArrayList<>();
+
+        try {
+            servicoObsServer = new ServicoObsInterfaceServer(this);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
         try {
             ServerSocket s = new ServerSocket(SERVER_PORT);
@@ -39,6 +50,8 @@ public class Server {
             System.out.println("Erro: Criação do ServerSocket");
             e.printStackTrace();
         }
+
+
     }
 
     private void enviarParaTodosOsClientes(MSG msg){
@@ -187,12 +200,15 @@ public class Server {
 
         private void autenticarUtilizador(Auth auth) {
             UtilizadorDao.autenticarUtilizador(auth);
+            c.associarUtilizador(UtilizadorDao.recuperar(auth.getUsername()));
             processaUserList();
+            servicoObsServer.notificaListeners();
         }
 
         private void desautenticarUtilizador(String username) {
             UtilizadorDao.desautenticarUtilizador(username);
             processaUserList();
+            servicoObsServer.notificaListeners();
         }
 
         public void enviarParaCliente(MSG msg){
@@ -209,5 +225,27 @@ public class Server {
     }
     private String getDate() {
         return new SimpleDateFormat("yyyy/MM/dd - HH:mm:ss").format(Calendar.getInstance().getTime());
+    }
+
+    public List<Conexao> getClientesConectados() {
+        return clientesConectados;
+    }
+
+    public List<Utilizador> getUtilizadoresAtivos(){
+        utilizadoresAtivos = new ArrayList<>();
+        for(Conexao c : clientesConectados){
+            utilizadoresAtivos.add(c.getUtilizador());
+        }
+
+        return utilizadoresAtivos;
+    }
+
+    public List<String> getUsernamesAtivos(){
+        usernamesAtivos = new ArrayList<>();
+        for(Conexao c : clientesConectados){
+            usernamesAtivos.add(c.getUtilizador().getUsername());
+        }
+
+        return usernamesAtivos;
     }
 }

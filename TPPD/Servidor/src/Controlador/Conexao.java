@@ -1,5 +1,7 @@
 package Controlador;
 
+import Modelo.Utilizador;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -10,9 +12,11 @@ public class Conexao {
     protected Socket socket;
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
+    protected Utilizador utilizador;
 
     public Conexao(Socket socket) {
         this.socket = socket;
+        this.utilizador = null;
     }
 
     public void iniciarInputStream() throws IOException {
@@ -35,6 +39,11 @@ public class Conexao {
         return socket;
     }
 
+    public Utilizador getUtilizador() {
+        return utilizador;
+    }
+
+    /* */
     public void fecharSocket() {
         if(socket.isConnected()) {
             try {
@@ -44,4 +53,10 @@ public class Conexao {
             }
         }
     }
+
+    public void associarUtilizador(Utilizador u){
+        this.utilizador = u;
+    }
+
+
 }

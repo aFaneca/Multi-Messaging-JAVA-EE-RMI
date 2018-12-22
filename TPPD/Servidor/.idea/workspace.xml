@@ -2,24 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="342423dc-515b-4f45-97f8-a81292a8d6bd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Cliente/Recursos/icon_offline.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Cliente/Recursos/icon_online.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Controlador/Controlador.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Controlador/Controlador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/META-INF/Cliente.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/src/Controlador/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/src/Controlador/Controlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cliente/src/GUI/ClienteView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/src/GUI/ClienteView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Monitor/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Monitor/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Monitor/src/Modelo/Constantes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Monitor/src/RMI/ServicoObsInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$MENSAGEM_TIPO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$MENSAGEM_TIPO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$RECURSOS.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$USER_MAP.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$USER_MAP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$USER_STATUS.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes$USER_STATUS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/out/production/Cliente/Modelo/Constantes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/src/Modelo/Constantes.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/src/Modelo/Constantes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TPPD/Controlador/Conexao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TPPD/Controlador/Conexao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TPPD/Modelo/Constantes.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TPPD/Modelo/Constantes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controlador/Conexao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controlador/Conexao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Constantes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/Constantes.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -73,26 +70,26 @@
     <session id="-1262366053">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="16" />
+          <entry key="project.closed" value="17" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="7" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
-          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.14" value="2" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="19" />
+          <entry key="project.opened" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="iml" value="2" />
-          <entry key="java" value="23" />
+          <entry key="java" value="45" />
           <entry key="mf" value="1" />
           <entry key="xml" value="2" />
         </counts>
@@ -100,19 +97,19 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="IDEA_MODULE" value="2" />
-          <entry key="JAVA" value="23" />
+          <entry key="JAVA" value="45" />
           <entry key="Manifest" value="1" />
           <entry key="XML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="7054" />
+          <entry key="java" value="9794" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="7053" />
+          <entry key="JAVA" value="9793" />
           <entry key="SQL" value="1" />
         </counts>
       </usages-collector>
@@ -162,71 +159,81 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modelo/ChatPrivado.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#630#631#0" expanded="true" />
-                <element signature="e#664#665#0" expanded="true" />
-                <element signature="e#1024#1025#0" expanded="true" />
-                <element signature="e#1066#1067#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modelo/Utilizador.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1056">
-              <caret line="55" selection-start-line="55" selection-end-line="55" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controlador/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3058">
-              <caret line="147" column="74" selection-start-line="147" selection-start-column="74" selection-end-line="147" selection-end-column="74" />
+            <state relative-caret-position="175">
+              <caret line="245" column="31" selection-start-line="245" selection-start-column="31" selection-end-line="245" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#processaNovaMensagemChat#0;class#AtendeCliente#0;class#Server#0" />
+                <element signature="method#processaChat#0;class#AtendeCliente#0;class#Server#0" />
+                <element signature="method#processaUserList#0;class#AtendeCliente#0;class#Server#0" />
+                <element signature="method#processaAuth#0;class#AtendeCliente#0;class#Server#0" />
+                <element signature="e#7137#7138#0" expanded="true" />
+                <element signature="e#7178#7179#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modelo/Mensagem.java">
+        <entry file="file://$PROJECT_DIR$/src/Controlador/Conexao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="657">
-              <caret line="39" column="3" selection-start-line="39" selection-start-column="3" selection-end-line="39" selection-end-column="3" />
+            <state relative-caret-position="305">
+              <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#984#985#0" expanded="true" />
+                <element signature="e#1017#1018#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modelo/MSG.java">
+        <entry file="file://$PROJECT_DIR$/src/RMI/ServicoObsInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            <state relative-caret-position="176">
+              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/RMI/ServicoObsInterfaceServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2254#2255#0" expanded="true" />
+                <element signature="e#2285#2286#0" expanded="true" />
+                <element signature="e#2334#2335#0" expanded="true" />
+                <element signature="e#2374#2375#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Modelo/Constantes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+            <state relative-caret-position="217">
+              <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RMI/ObsListenerInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -236,6 +243,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -248,6 +256,9 @@
       <find>write</find>
       <find>reset</find>
       <find>getDate</find>
+      <find>notif</find>
+      <find>notifi</find>
+      <find>addobs</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -260,12 +271,22 @@
         <option value="$PROJECT_DIR$/src/DAO/Conector.java" />
         <option value="$PROJECT_DIR$/src/Modelo/Auth.java" />
         <option value="$PROJECT_DIR$/src/DAO/UtilizadorDao.java" />
-        <option value="$PROJECT_DIR$/src/Controlador/Conexao.java" />
         <option value="$PROJECT_DIR$/src/Modelo/Utilizador.java" />
         <option value="$PROJECT_DIR$/src/Modelo/ChatPrivado.java" />
-        <option value="$PROJECT_DIR$/src/Controlador/Server.java" />
         <option value="$PROJECT_DIR$/src/Modelo/Mensagem.java" />
+        <option value="$PROJECT_DIR$/src/RMI/SistemaObsInterface.java" />
         <option value="$PROJECT_DIR$/src/Modelo/Constantes.java" />
+        <option value="$PROJECT_DIR$/src/RMI/SistemaObsServer.java" />
+        <option value="$PROJECT_DIR$/src/Controlador/Conexao.java" />
+        <option value="$PROJECT_DIR$/src/RMI/SistemaObsImpl.java" />
+        <option value="$PROJECT_DIR$/src/RMI/SistemaObsClientInterface.java" />
+        <option value="$PROJECT_DIR$/src/RMI/SistemaObsClientImple.java" />
+        <option value="$PROJECT_DIR$/src/RMI/ObsListenerInterface.java" />
+        <option value="$PROJECT_DIR$/src/RMI/ServicoObsServer.java" />
+        <option value="$PROJECT_DIR$/src/RMI/ServicoObs.java" />
+        <option value="$PROJECT_DIR$/src/RMI/ServicoObsInterface.java" />
+        <option value="$PROJECT_DIR$/src/Controlador/Server.java" />
+        <option value="$PROJECT_DIR$/src/RMI/ServicoObsInterfaceServer.java" />
       </list>
     </option>
   </component>
@@ -325,13 +346,13 @@
               <item name="TPPD-Server" type="b2602c69:ProjectViewProjectNode" />
               <item name="Servidor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="DAO" type="462c0819:PsiDirectoryNode" />
+              <item name="Modelo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TPPD-Server" type="b2602c69:ProjectViewProjectNode" />
               <item name="Servidor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Modelo" type="462c0819:PsiDirectoryNode" />
+              <item name="RMI" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TPPD-Server" type="b2602c69:ProjectViewProjectNode" />
@@ -380,7 +401,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545351482149" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545495268705" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Cliente" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -388,6 +409,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="RMI" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -463,11 +489,12 @@
       <workItem from="1545240588723" duration="7611000" />
       <workItem from="1545248694218" duration="3778000" />
       <workItem from="1545336460921" duration="4905000" />
+      <workItem from="1545476314199" duration="11527000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67069000" />
+    <option name="totallyTimeSpent" value="78596000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -482,7 +509,7 @@
     <frame x="-1929" y="-361" width="1938" height="1060" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.83604336" visible="true" weight="0.17991407" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.83604336" visible="true" weight="0.18259935" />
       <window_info id="Structure" order="1" sideWeight="0.16161616" side_tool="true" weight="0.17239527" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -492,7 +519,7 @@
       <window_info id="Favorites" order="7" sideWeight="0.16395664" side_tool="true" weight="0.1745435" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32996634" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.61391693" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39506173" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.24691358" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -685,19 +712,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DAO/UtilizadorDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1848">
-          <caret line="151" column="38" selection-start-line="151" selection-start-column="38" selection-end-line="151" selection-end-column="38" />
-          <folding>
-            <element signature="method#guardar#0;class#UtilizadorDao#0" />
-            <element signature="method#validaLogin#0;class#UtilizadorDao#0" />
-            <element signature="method#transformarEmObj#0;class#UtilizadorDao#0" />
-            <element signature="method#transformarEmObjArr#0;class#UtilizadorDao#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Modelo/Auth.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1034">
@@ -725,20 +739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controlador/Conexao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controlador/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="26" column="24" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Modelo/ChatPrivado.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
@@ -763,10 +763,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controlador/Server.java">
+    <entry file="file://$PROJECT_DIR$/src/Modelo/Mensagem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3058">
-          <caret line="147" column="74" selection-start-line="147" selection-start-column="74" selection-end-line="147" selection-end-column="74" />
+        <state relative-caret-position="660">
+          <caret line="39" column="3" selection-start-line="39" selection-start-column="3" selection-end-line="39" selection-end-column="3" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -780,10 +780,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modelo/Mensagem.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/net/Socket.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="39" column="3" selection-start-line="39" selection-start-column="3" selection-end-line="39" selection-end-column="3" />
+        <state relative-caret-position="287">
+          <caret line="53" column="6" selection-start-line="53" selection-start-column="6" selection-end-line="53" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DAO/UtilizadorDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="124" column="23" selection-start-line="124" selection-start-column="23" selection-end-line="124" selection-end-column="23" />
+          <folding>
+            <element signature="method#guardar#0;class#UtilizadorDao#0" />
+            <element signature="method#validaLogin#0;class#UtilizadorDao#0" />
+            <element signature="method#transformarEmObj#0;class#UtilizadorDao#0" />
+            <element signature="method#transformarEmObjArr#0;class#UtilizadorDao#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RMI/SistemaObsClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RMI/SistemaObsServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="23" column="61" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#156#157#0" expanded="true" />
+            <element signature="e#192#193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RMI/SistemaObsClientInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RMI/SistemaObsImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1295">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RMI/SistemaObsInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="64" selection-start-line="13" selection-start-column="64" selection-end-line="13" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RMI/SistemaObsClientImple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="42" lean-forward="true" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -792,8 +861,76 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Modelo/Constantes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+        <state relative-caret-position="217">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controlador/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="26" column="24" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controlador/Conexao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+          <folding>
+            <element signature="e#984#985#0" expanded="true" />
+            <element signature="e#1017#1018#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controlador/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="245" column="31" selection-start-line="245" selection-start-column="31" selection-end-line="245" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#processaNovaMensagemChat#0;class#AtendeCliente#0;class#Server#0" />
+            <element signature="method#processaChat#0;class#AtendeCliente#0;class#Server#0" />
+            <element signature="method#processaUserList#0;class#AtendeCliente#0;class#Server#0" />
+            <element signature="method#processaAuth#0;class#AtendeCliente#0;class#Server#0" />
+            <element signature="e#7137#7138#0" expanded="true" />
+            <element signature="e#7178#7179#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RMI/ObsListenerInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RMI/ServicoObsInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RMI/ServicoObsInterfaceServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2254#2255#0" expanded="true" />
+            <element signature="e#2285#2286#0" expanded="true" />
+            <element signature="e#2334#2335#0" expanded="true" />
+            <element signature="e#2374#2375#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
