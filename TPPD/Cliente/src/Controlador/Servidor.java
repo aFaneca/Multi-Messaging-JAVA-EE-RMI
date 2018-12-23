@@ -179,6 +179,7 @@ public class Servidor extends Observable{
 
         private void recebeNovaMensagemChatPrivado(MSG msg) {
             ChatPrivado cv = (ChatPrivado) msg.getObj();
+            //boolean jaExiste = listaDeChatsPrivados.contains(cv);
             boolean isForMe = false;
 
             for(Utilizador u : cv.getUsers()) {

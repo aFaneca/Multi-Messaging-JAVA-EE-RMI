@@ -79,7 +79,7 @@ public class KeepAliveThread implements Runnable{
 
                     if(enviarParaCliente(new MSG(Constantes.MENSAGEM_TIPO.KEEP_ALIVE, null)) == -1){
                         UtilizadorDao.changeNrFalhas(conexao.getUtilizador().getUsername(), +1);
-                        System.out.println("Impossível entrar em contato com " + conexao.getUtilizador().getUsername() + "(" + conexao.getSocket().getRemoteSocketAddress() + ". A tentar novamente...");
+                        System.out.println("Impossível entrar em contato com " + conexao.getUtilizador().getUsername() + "(" + conexao.getSocket().getRemoteSocketAddress() + "). A tentar novamente...");
                         continue;
                     }
 

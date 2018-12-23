@@ -20,7 +20,7 @@ import Modelo.*;
 
 /**
  *
- * @author Ricardo Marques
+ * @author António Faneca & Ricardo Marques
  */
 public class Controlador implements ActionListener{
 
