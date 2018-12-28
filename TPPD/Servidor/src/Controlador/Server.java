@@ -32,26 +32,32 @@ public class Server {
             e.printStackTrace();
         }
 
-        try {
-            ServerSocket s = new ServerSocket(SERVER_PORT);
-            s.setSoTimeout(SERVER_TIMEOUT);
-            System.out.println("À espera de clientes...");
-            while(true){
-                Conexao c = new Conexao (s.accept());
-                clientesConectados.add(c); // adiciona cliente à lista de clientes
-                clienteConectado = true;
-                new Thread(new AtendeCliente(c)).start();
+        boolean encontrouPortaDisponivel = false;
+
+        while(encontrouPortaDisponivel == false) {
+            Random rand = new Random();
+            int SERVER_PORT = rand.nextInt(49151) + 1024;
+            try {
+                ServerSocket s = new ServerSocket(SERVER_PORT);
+                s.setSoTimeout(SERVER_TIMEOUT);
+                System.out.println("À espera de clientes...");
+                encontrouPortaDisponivel = true;
+                System.out.println(SERVER_PORT);
+
+                while (true) {
+                    Conexao c = new Conexao(s.accept());
+                    clientesConectados.add(c); // adiciona cliente à lista de clientes
+                    clienteConectado = true;
+                    new Thread(new AtendeCliente(c)).start();
+                }
+            } catch (BindException e1) {
+                System.out.println("Já existe um server aberto: " + e1.getMessage());
+                System.exit(1);
+            } catch (IOException e) {
+                System.out.println("Erro: Criação do ServerSocket");
+                e.printStackTrace();
             }
-
-        } catch (BindException e1) {
-            System.out.println("Já existe um server aberto: " + e1.getMessage());
-            System.exit(1);
-        }catch (IOException e) {
-            System.out.println("Erro: Criação do ServerSocket");
-            e.printStackTrace();
         }
-
-
     }
 
     private void enviarParaTodosOsClientes(MSG msg){

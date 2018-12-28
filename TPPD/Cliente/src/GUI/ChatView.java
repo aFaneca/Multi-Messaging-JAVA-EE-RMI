@@ -43,6 +43,7 @@ public class ChatView extends JFrame implements Observer {
         panel_talk.setBounds(500, 50, 300, 500);
         panel_talk.setBackground(Color.WHITE);
         panel_talk.setVerticalAlignment(SwingConstants.BOTTOM);
+        getContentPane().setBackground(new java.awt.Color(135, 206, 250));
         //panel_talk.setText(mensagem);
         panel_talk.setOpaque(true);
 
