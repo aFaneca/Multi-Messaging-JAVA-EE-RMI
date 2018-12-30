@@ -18,18 +18,13 @@ public class MonitoringView extends JFrame{
         this.setResizable(false);
 
         //window settings
-        setLayout(null);
+        setLayout(new BorderLayout());
         setSize(DIM_X, DIM_Y);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setBackground(new java.awt.Color(135, 206, 250));
-
         panel_centro = new JPanel();
-        panel_centro.setBounds(300, 100, 300, 300);
         configuraPainelCentro(null);
 
-        panel_centro.setBackground(Color.white);
-
-        add(panel_centro);
+        add(panel_centro, BorderLayout.CENTER);
     }
 
     public void configuraPainelCentro(List<String> lista) {
@@ -40,7 +35,7 @@ public class MonitoringView extends JFrame{
 
         if(lista != null){
             for(String username : lista){
-                txt += "→ " + username + "<br/>";
+                txt += username + "<br/>";
             }
         }
 
