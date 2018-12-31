@@ -49,8 +49,6 @@ public class Server {
             System.out.println("Erro: Criação do ServerSocket");
             e.printStackTrace();
         }
-
-
     }
 
     private void enviarParaTodosOsClientes(MSG msg){
@@ -65,8 +63,6 @@ public class Server {
                 //e.printStackTrace();
             }
         }
-
-
     }
 
     private void enviarParaClientesExternos(MSG msg){
@@ -136,8 +132,6 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         }
 
 
@@ -165,7 +159,6 @@ public class Server {
             }finally{
                     c.fecharSocket();
             }
-
         }
 
         private void processaMsg(MSG msg) {
@@ -186,7 +179,6 @@ public class Server {
                 default:
                     break;
             }
-
         }
 
         private void processaNovaMensagemChat(MSG msg){
@@ -218,7 +210,7 @@ public class Server {
 
             ChatPrivado cp2 = cp;
             enviarParaTodosOsClientes(new MSG(Constantes.MENSAGEM_TIPO.NEW_PRIVATE_CHAT_MESSAGE, cp));
-
+            enviarParaClientesExternos(new MSG(Constantes.MENSAGEM_TIPO.NEW_PRIVATE_CHAT_MESSAGE, cp));
         }
 
         private void processaChat(MSG msg){
@@ -231,6 +223,7 @@ public class Server {
 
             ChatPrivado cp = new ChatPrivado(users);
             enviarParaTodosOsClientes(new MSG(Constantes.MENSAGEM_TIPO.BEGIN_CHAT_REPLY, cp));
+            enviarParaClientesExternos(new MSG(Constantes.MENSAGEM_TIPO.BEGIN_CHAT_REPLY, cp));
         }
 
         private void processaUserList() {
@@ -254,7 +247,6 @@ public class Server {
                 valido = false;
             }
             enviarParaCliente(new MSG(Constantes.MENSAGEM_TIPO.AUTH_REPLY, new Boolean(valido))); // Envia a resposta de volta para o cliente
-
             //
         }
 
