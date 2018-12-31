@@ -6,15 +6,14 @@ import Modelo.*;
 import RMI.ServicoObsInterfaceServer;
 
 import java.io.*;
-import java.net.BindException;
-import java.net.ServerSocket;
+import java.net.*;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 
 public class Server {
-    protected static final int SERVER_PORT = 9997;
+    protected static final int SERVER_PORT = 0;
     protected static final int SERVER_TIMEOUT = 0; //10000;
     protected boolean clienteConectado = false;
     protected List<Conexao> clientesConectados;
@@ -35,7 +34,7 @@ public class Server {
         try {
             ServerSocket s = new ServerSocket(SERVER_PORT);
             s.setSoTimeout(SERVER_TIMEOUT);
-            System.out.println("À espera de clientes...");
+            System.out.println("Ligado à porta " + s.getLocalPort() + ". À espera de clientes...");
             while(true){
                 Conexao c = new Conexao (s.accept());
                 clientesConectados.add(c); // adiciona cliente à lista de clientes
@@ -68,18 +67,59 @@ public class Server {
         }
 
 
-       /*     for(Conexao cliente : clientesConectados){
-                try {
-                    cliente.enviar().writeObject(msg);
-                    cliente.enviar().flush();
-                }catch (Exception e) {
-                    clientesConectados.remove(cliente);
-                    //UtilizadorDao.desautenticarUtilizador(cliente.getUtilizador().getUsername());
-                    //e.printStackTrace();
-                }
-            }*/
+    }
+
+    private void enviarParaClientesExternos(MSG msg){
+
+        List<Utilizador> todosOsUtilizadoresAtivos = null;
+        List<Utilizador> utilizadoresExternos = new ArrayList<>();
+
+        todosOsUtilizadoresAtivos = UtilizadorDao.recuperarTodosOsUtilizadoresAtivos();
+
+        for(Utilizador u : todosOsUtilizadoresAtivos){
+            if(!utilizadoresAtivos.contains(u)){
+                utilizadoresExternos.add(u);
+            }
         }
 
+        if(utilizadoresExternos.isEmpty()) return;
+
+        DatagramSocket ds = null;
+        try {
+            ds = new DatagramSocket();
+
+            for(Utilizador u1 : utilizadoresExternos){
+                enviarObjPorUDP(ds, InetAddress.getByName(u1.getEnderecoIP()), u1.getPortaUDP(), msg);
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void enviarObjPorUDP(DatagramSocket ds, InetAddress endereco, int portaUDP, MSG msg) throws IOException {
+        // Serializar o objeto
+        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+        ObjectOutput oo = new ObjectOutputStream(bStream);
+        oo.writeObject(msg);
+        oo.close();
+
+        byte[] msgSerializada = bStream.toByteArray();
+        DatagramPacket dp = new DatagramPacket(msgSerializada, msgSerializada.length, endereco, portaUDP); // o pacote que é enviado (dados a enviar (em bytes), tamanho dos dados, IP ADDRESS, PORT NUMBER
+        ds.send(dp);
+        System.out.println("Enviei mensagem para " + dp.getSocketAddress());
+
+        /*int i = 8;
+        byte[] b = String.valueOf(i).getBytes(); // O getbytes só funciona na conversão de strings, daí termos que converter i para string
+
+        DatagramPacket dp = new DatagramPacket(b, b.length, endereco, portaUDP); // o pacote que é enviado (dados a enviar (em bytes), tamanho dos dados, IP ADDRESS, PORT NUMBER
+
+        ds.send(dp);
+        System.out.println("Enviei mensagem para " + dp.getSocketAddress());*/
+    }
 
     public class AtendeCliente implements Runnable {
         Conexao c; // Socket connection to the client
@@ -102,7 +142,7 @@ public class Server {
 
 
         public void run(){
-            System.out.println("Conectado a partir de " + c.getSocket().getInetAddress());
+            System.out.println("Conectado a partir de " + c.getSocket().getRemoteSocketAddress());
             KeepAliveThread keepAlive = new KeepAliveThread(c, this);
             new Thread(keepAlive).start();
             try{
@@ -194,8 +234,10 @@ public class Server {
         }
 
         private void processaUserList() {
+            getUtilizadoresAtivos(); // Recria a lista de utilizadores ativos
             List<Utilizador> lista= UtilizadorDao.recuperarTodosOsUtilizadores();
-            enviarParaTodosOsClientes(new MSG(Constantes.MENSAGEM_TIPO.GET_USER_LIST_REPLY, lista));
+            enviarParaTodosOsClientes(new MSG(Constantes.MENSAGEM_TIPO.GET_USER_LIST_REPLY, lista)); // enviar para clientes deste servidor (TCP)
+            enviarParaClientesExternos(new MSG(Constantes.MENSAGEM_TIPO.GET_USER_LIST_REPLY, lista)); // enviar para clientes de outros servidores (UDP)
         }
 
         private void processaAuth(MSG msg) {
@@ -212,6 +254,8 @@ public class Server {
                 valido = false;
             }
             enviarParaCliente(new MSG(Constantes.MENSAGEM_TIPO.AUTH_REPLY, new Boolean(valido))); // Envia a resposta de volta para o cliente
+
+            //
         }
 
         private void autenticarUtilizador(Auth auth) {

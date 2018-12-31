@@ -33,7 +33,7 @@ public class Servidor extends Observable{
         this.listaDeChatViews = new ArrayList<>();
     }
 
-    private void notificaObservadores(){
+    protected void notificaObservadores(){
         setChanged();
         notifyObservers(this);
     }
@@ -118,7 +118,7 @@ public class Servidor extends Observable{
     }
 
 
-    protected class EscutaServidor implements Runnable{
+    public class EscutaServidor implements Runnable{
         private Socket s;
 
         public EscutaServidor(Socket s){
@@ -240,7 +240,7 @@ public class Servidor extends Observable{
 
         }
 
-        private void recebeListaDeUtilizadores(MSG msg) {
+        public void recebeListaDeUtilizadores(MSG msg) {
 
 
             listaDeUtilizadores = (List<Utilizador>) msg.getObj();
@@ -251,7 +251,6 @@ public class Servidor extends Observable{
             }
 
             notificaObservadores();
-            
         }
     }
 
@@ -321,5 +320,13 @@ public class Servidor extends Observable{
 
     public Map<String, String> getMapaDeUtilizadores() {
         return mapaDeUtilizadores;
+    }
+
+    public void setListaDeUtilizadores(List<Utilizador> listaDeUtilizadores) {
+        this.listaDeUtilizadores = listaDeUtilizadores;
+    }
+
+    public void setMapaDeUtilizadores(Map<String, String> mapaDeUtilizadores) {
+        this.mapaDeUtilizadores = mapaDeUtilizadores;
     }
 }

@@ -30,6 +30,7 @@ public class Controlador implements ActionListener{
     boolean login = false;
     private Main m;
     Servidor server;
+    ServidorUDP servidorUDP;
 
     public Controlador(Main m){
         loginView.setVisible(true);
@@ -38,6 +39,7 @@ public class Controlador implements ActionListener{
         clienteView.addListener(this, clienteView.getBtn_Chat());
         //loginView.addListener(this, clienteView.getB_Enviar());
         this.m = m;
+        servidorUDP = new ServidorUDP(this);
     }
 
 
@@ -58,7 +60,9 @@ public class Controlador implements ActionListener{
 
         // 2 - Envia username + password para o server
         server.conectar();
-        server.enviarParaServidor(new MSG(Constantes.MENSAGEM_TIPO.AUTH, new Auth(username, password, serverPort, serverPort, serverName)));
+        servidorUDP.iniciarServidorUDP();
+
+        server.enviarParaServidor(new MSG(Constantes.MENSAGEM_TIPO.AUTH, new Auth(username, password, server.getSocket().getLocalPort(), servidorUDP.serverPort, serverName)));
 
         // 3 - Espera por resposta
         try {
@@ -125,24 +129,6 @@ public class Controlador implements ActionListener{
             if(userDestino != null){
                 iniciarChat(userDestino);
             }
-
-
-
-            /*
-            String userDestino = null;
-            String ultimaPalavra = null;
-
-            if(clienteView.nomeSelecionado() == null) return; // this means no name was selected
-
-            userDestino = clienteView.nomeSelecionado().substring(0, clienteView.nomeSelecionado().lastIndexOf(" "));
-            ultimaPalavra = clienteView.nomeSelecionado().substring(clienteView.nomeSelecionado().lastIndexOf(" ") + 1);
-
-            List<Utilizador> utilizadoresNoChat = new ArrayList<>();
-
-            ChatPrivado chatPrivado = new ChatPrivado(null);
-
-            ChatView cv = new ChatView(server.getUsername(), "jo", chatPrivado);
-            */
         }
     }
 
@@ -182,10 +168,6 @@ public class Controlador implements ActionListener{
     public void enviarMensagemChatPrivado(ChatPrivado chatPrivado, String text, String username) {
 
         /* OBJETO A ENVIAR */
-        /*List<Object> objs = new ArrayList<>();
-
-        objs.add(text);
-        objs.add(chatPrivado);*/
 
         Map<String, Object> obj= new HashMap<>();
         obj.put(Constantes.MENSAGEM_TEXTO, text);

@@ -77,6 +77,25 @@ public class UtilizadorDao {
         return null;
     }
 
+    public static List<Utilizador> recuperarTodosOsUtilizadoresAtivos(){
+        String sql = "SELECT * FROM " + nomeDaTabela
+                + " WHERE estado = ?";
+
+        try {
+            PreparedStatement ps = Conector.getConexao().prepareStatement(sql);
+            ps.setString(1, "Ativo");
+
+            ResultSet rs = ps.executeQuery();
+
+            // Transforma o ResultSet num objeto de Utilizador
+            return transformarEmObjArr(rs);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilizadorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 
     public static int getNrFalhas(String username){
         String sql = "SELECT cnt_falhas FROM " + nomeDaTabela +

@@ -11,10 +11,6 @@ package Controlador;
  */
 public class Main {
      public static void main(String[] args) {
-         /*UtilizadorDao ud = new UtilizadorDao("utilizador");
-         ud.guardar(u);
-         Utilizador u = ud.recuperar("Tony");
-         System.out.println(u);*/
         String ipdb;
 
          if(args.length != 1){
