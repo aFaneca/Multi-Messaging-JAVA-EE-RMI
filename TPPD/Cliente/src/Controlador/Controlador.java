@@ -37,7 +37,6 @@ public class Controlador implements ActionListener{
         loginView.addListener(this, loginView.getB_Login());
         clienteView.addListener(this, clienteView.getBtn_Sair());
         clienteView.addListener(this, clienteView.getBtn_Chat());
-        //loginView.addListener(this, clienteView.getB_Enviar());
         this.m = m;
         servidorUDP = new ServidorUDP(this);
     }
@@ -102,8 +101,6 @@ public class Controlador implements ActionListener{
         return true;
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         Object origem = e.getSource();
@@ -148,7 +145,6 @@ public class Controlador implements ActionListener{
     public void janelaDeChatVaiFechar(ChatView view, ChatPrivado cp){
         server.listaDeChatsPrivados.remove(cp);
         server.listaDeChatViews.remove(view);
-
     }
 
     private void terminarSessao() {

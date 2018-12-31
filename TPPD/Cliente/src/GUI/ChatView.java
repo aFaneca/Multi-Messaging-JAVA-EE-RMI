@@ -17,8 +17,10 @@ import java.util.Observer;
 public class ChatView extends JFrame implements Observer {
 
     private JLabel panel_talk;
+    private JList panel_ficheiros;
     private JTextArea zonaChat;
     private JButton btn_enviar;
+    private JButton btn_transferir;
     private Controlador c;
     private String guardaChat;
     private String user, userDestino;
@@ -36,11 +38,19 @@ public class ChatView extends JFrame implements Observer {
         setLayout(null);
         setSize(1024,670);
 
+        getContentPane().setBackground(new java.awt.Color(135, 206, 250));
+
         btn_enviar = new JButton("Enviar");
+        btn_transferir = new JButton("Tranferir");
         zonaChat = new JTextArea();
         panel_talk = new JLabel();
+        panel_ficheiros = new JList();
 
-        panel_talk.setBounds(500, 50, 300, 500);
+        panel_ficheiros.setBounds(50, 50, 400, 200);
+        panel_ficheiros.setBackground(Color.WHITE);
+        panel_ficheiros.setOpaque(true);
+
+        panel_talk.setBounds(550, 50, 300, 500);
         panel_talk.setBackground(Color.WHITE);
         panel_talk.setVerticalAlignment(SwingConstants.BOTTOM);
         //panel_talk.setText(mensagem);
@@ -48,10 +58,13 @@ public class ChatView extends JFrame implements Observer {
 
         zonaChat.setBounds(50, 350, 400, 200);
         btn_enviar.setBounds(50,560,75,25);
+        btn_transferir.setBounds(50, 260, 100,25);
         atualizaMensagens();
         add(zonaChat);
         add(panel_talk);
         add(btn_enviar);
+        add(btn_transferir);
+        add(panel_ficheiros);
         //setAcaoNoFechoDaJanela(c);
         btn_enviar.addActionListener(new ActionListener() {
             @Override
@@ -72,6 +85,7 @@ public class ChatView extends JFrame implements Observer {
     public ChatPrivado getChatPrivado(){
         return chatPrivado;
     }
+
     private void setAcaoNoFechoDaJanela(Controlador c){
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -130,9 +144,6 @@ public class ChatView extends JFrame implements Observer {
     }
 
     public JButton getBtn_Enviar(){return btn_enviar;}
-
-
-
 
 
     @Override
