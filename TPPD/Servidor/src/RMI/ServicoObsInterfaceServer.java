@@ -5,6 +5,7 @@ import Modelo.Constantes;
 import Modelo.Utilizador;
 
 import java.net.MalformedURLException;
+import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -66,6 +67,7 @@ public class ServicoObsInterfaceServer extends UnicastRemoteObject implements Se
                 LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             }catch(Exception e){
                 System.out.println("Registry is already in use on port " + Registry.REGISTRY_PORT);
+                LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
             }
             String registo = "rmi://127.0.0.1/" + Constantes.RMI_NOME_SERVICO;
             Naming.rebind(registo, this);

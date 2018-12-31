@@ -9,7 +9,6 @@ public class Mensagem implements Serializable {
     static final long serialVersionUID = 102020L;
 
     private Utilizador fromUser;
-    /*private Utilizador toUser;*/
     private String mensagem;
     private String data;
 

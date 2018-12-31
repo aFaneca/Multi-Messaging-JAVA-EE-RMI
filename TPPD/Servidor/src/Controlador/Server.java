@@ -107,14 +107,6 @@ public class Server {
         DatagramPacket dp = new DatagramPacket(msgSerializada, msgSerializada.length, endereco, portaUDP); // o pacote que é enviado (dados a enviar (em bytes), tamanho dos dados, IP ADDRESS, PORT NUMBER
         ds.send(dp);
         System.out.println("Enviei mensagem para " + dp.getSocketAddress());
-
-        /*int i = 8;
-        byte[] b = String.valueOf(i).getBytes(); // O getbytes só funciona na conversão de strings, daí termos que converter i para string
-
-        DatagramPacket dp = new DatagramPacket(b, b.length, endereco, portaUDP); // o pacote que é enviado (dados a enviar (em bytes), tamanho dos dados, IP ADDRESS, PORT NUMBER
-
-        ds.send(dp);
-        System.out.println("Enviei mensagem para " + dp.getSocketAddress());*/
     }
 
     public class AtendeCliente implements Runnable {

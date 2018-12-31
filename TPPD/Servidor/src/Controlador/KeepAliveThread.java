@@ -20,11 +20,9 @@ public class KeepAliveThread implements Runnable{
 
     public int enviarParaCliente(MSG msg){
         try {
-            //out = new ObjectOutputStream(s.getOutputStream()); // stream de saída
             conexao.enviar().writeObject(msg);
             conexao.enviar().reset();
             conexao.enviar().flush();
-            //out.close();
         }catch( SocketException e) {
             //System.out.println("Erro a escrever no socket.");
             return -1;

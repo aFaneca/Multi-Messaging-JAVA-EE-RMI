@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author me
+ * @author António Faneca e Ricardo Marques
  */
 public class UtilizadorDao {
     private static String nomeDaTabela = "utilizador";

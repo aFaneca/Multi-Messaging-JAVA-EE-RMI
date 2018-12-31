@@ -40,7 +40,7 @@ public class ObsMonitor extends UnicastRemoteObject implements ObsListenerInterf
 
 
         }catch (NotBoundException e){
-            System.out.println ("No sensors available");
+            System.out.println ("RMI Error - " + e);
         }catch (RemoteException e) {
             System.out.println ("RMI Error - " + e);
             e.printStackTrace();

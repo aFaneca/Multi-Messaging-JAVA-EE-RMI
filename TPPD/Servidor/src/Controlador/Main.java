@@ -7,7 +7,7 @@ package Controlador;
 
 /**
  *
- * @author me
+ * @author António Faneca e Ricardo Marques
  */
 public class Main {
      public static void main(String[] args) {
