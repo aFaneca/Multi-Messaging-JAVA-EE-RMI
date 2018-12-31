@@ -51,7 +51,7 @@ public class Server {
         }
     }
 
-    private void enviarParaTodosOsClientes(MSG msg){
+    private void enviarParaClientesInternos(MSG msg){
 
         for(int i = 0; i < clientesConectados.size(); i++){
             try {
@@ -209,7 +209,7 @@ public class Server {
             cp.addMessage(new Mensagem(utilizadorRemetente, mensagem, data));
 
             ChatPrivado cp2 = cp;
-            enviarParaTodosOsClientes(new MSG(Constantes.MENSAGEM_TIPO.NEW_PRIVATE_CHAT_MESSAGE, cp));
+            enviarParaClientesInternos(new MSG(Constantes.MENSAGEM_TIPO.NEW_PRIVATE_CHAT_MESSAGE, cp));
             enviarParaClientesExternos(new MSG(Constantes.MENSAGEM_TIPO.NEW_PRIVATE_CHAT_MESSAGE, cp));
         }
 
@@ -222,14 +222,14 @@ public class Server {
             }
 
             ChatPrivado cp = new ChatPrivado(users);
-            enviarParaTodosOsClientes(new MSG(Constantes.MENSAGEM_TIPO.BEGIN_CHAT_REPLY, cp));
+            enviarParaClientesInternos(new MSG(Constantes.MENSAGEM_TIPO.BEGIN_CHAT_REPLY, cp));
             enviarParaClientesExternos(new MSG(Constantes.MENSAGEM_TIPO.BEGIN_CHAT_REPLY, cp));
         }
 
         private void processaUserList() {
             getUtilizadoresAtivos(); // Recria a lista de utilizadores ativos
             List<Utilizador> lista= UtilizadorDao.recuperarTodosOsUtilizadores();
-            enviarParaTodosOsClientes(new MSG(Constantes.MENSAGEM_TIPO.GET_USER_LIST_REPLY, lista)); // enviar para clientes deste servidor (TCP)
+            enviarParaClientesInternos(new MSG(Constantes.MENSAGEM_TIPO.GET_USER_LIST_REPLY, lista)); // enviar para clientes deste servidor (TCP)
             enviarParaClientesExternos(new MSG(Constantes.MENSAGEM_TIPO.GET_USER_LIST_REPLY, lista)); // enviar para clientes de outros servidores (UDP)
         }
 
